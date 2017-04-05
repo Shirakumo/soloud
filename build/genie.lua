@@ -19,7 +19,6 @@ elseif (os.is("macosx")) then
 	WITH_COREAUDIO = 1
 else
 	WITH_ALSA = 1
-	WITH_OSS = 1
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
