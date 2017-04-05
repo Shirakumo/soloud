@@ -356,7 +356,7 @@ if (WITH_COREAUDIO == 1) then
 	links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 		if (not os.is("windows")) then
 		  links { "pthread" }
 		end
@@ -381,7 +381,7 @@ if (WITH_COREAUDIO == 1) then
 	links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 		if (not os.is("windows")) then
 		  links { "pthread" }
 		end
@@ -407,7 +407,7 @@ if (WITH_COREAUDIO == 1) then
 end
 
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 		if (not os.is("windows")) then
 		  links { "pthread" }
 		end
@@ -432,7 +432,7 @@ if (WITH_COREAUDIO == 1) then
 	links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 		if (not os.is("windows")) then
 		  links { "pthread" }
 		end
@@ -677,7 +677,7 @@ end
 	  "../include"
 	}
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 		if (not os.is("windows")) then
 		  links { "pthread" }
 		end
@@ -708,7 +708,7 @@ end
 		  "../include"
 		}
 
-		links {"SoloudStatic"}
+		links {"SoloudStatic", "dl"}
 
 if (os.is("Windows")) then
 	linkoptions { "/DEF:\"../../src/c_api/soloud.def\"" }
@@ -759,7 +759,7 @@ if (WITH_COREAUDIO == 1) then
 	links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic", "SoloudDemoCommon", "SDL2main", "SDL2", "opengl32"}
+		links {"SoloudStatic", "SoloudDemoCommon", "SDL2main", "SDL2", "opengl32", "dl"}
 
 		targetname (_name)
 end
@@ -833,7 +833,7 @@ end
 		links { "portmidi" }
 	end
 
-		links {"SoloudStatic", "SDL2main", "SDL2", "opengl32"}
+		links {"SoloudStatic", "SDL2main", "SDL2", "opengl32", "dl"}
 
 		targetname "piano"
 
