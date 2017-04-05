@@ -709,6 +709,12 @@ end
 
 		links {"SoloudStatic", "dl"}
 
+if (WITH_ALSA == 1) then
+	links {"asound"}
+end
+if (WITH_COREAUDIO == 1) then
+	links {"AudioToolbox.framework"}
+end
 if (os.is("Windows")) then
 	linkoptions { "/DEF:\"../../src/c_api/soloud.def\"" }
 end
