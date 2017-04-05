@@ -119,6 +119,11 @@ newoption {
 }
 
 newoption {
+        trigger           = "with-oss",
+        description = "Include Open Sound System backend in build"
+}
+
+newoption {
 	trigger		  = "with-tools",
 	description = "Include (optional) tools in build"
 }
@@ -271,6 +276,10 @@ if _OPTIONS["with-native-only"] then
 	else
 	  WITH_OSS = 1
 	end
+end
+
+if _OPTIONS["with-oss"] then
+        WITH_OSS = 1
 end
 
 if _OPTIONS["with-portmidi"] then
