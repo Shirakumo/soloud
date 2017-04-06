@@ -300,3 +300,6 @@ EXPORTS
 	TedSid_setInaudibleBehavior
 	TedSid_setFilter
 	TedSid_stop
+        VirtualFilter_count
+        VirtualFilter_create
+        VirtualFilter_get

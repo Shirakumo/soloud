@@ -108,8 +108,12 @@ typedef void * DCRemovalFilter;
 typedef void * Openmpt;
 typedef void * Monotone;
 typedef void * TedSid;
+typedef void * VirtualFilter;
+typedef void * VirtualFilterInstance;
 typedef void * File;
 
+typedef double time;
+  
 /*
  * Soloud
  */
@@ -482,6 +486,16 @@ void TedSid_set3dAttenuator(TedSid * aTedSid, AudioAttenuator * aAttenuator);
 void TedSid_setInaudibleBehavior(TedSid * aTedSid, int aMustTick, int aKill);
 void TedSid_setFilter(TedSid * aTedSid, unsigned int aFilterId, Filter * aFilter);
 void TedSid_stop(TedSid * aTedSid);
+
+/* 
+ * VirtualFilter
+ */
+unsigned int VirtualFilter_count();
+unsigned int VirtualFilter_create(int aNumParams,
+                                  void (*aConstructor)(), void (*aDestructor)(),
+                                  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+                                  void (*aFilterChannel)(float *,  unsigned int,  float, time));
+VirtualFilterInstance *VirtualFilter_get(int id);
 #ifdef  __cplusplus
 } // extern "C"
 #endif

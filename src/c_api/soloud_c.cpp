@@ -29,6 +29,8 @@ freely, subject to the following restrictions:
 
 /* SoLoud C-Api Code Generator (c)2013-2016 Jari Komppa http://iki.fi/sol/ */
 
+/* This file has been edited for Shirakumo's Virtual class support. */
+
 #include "../include/soloud.h"
 #include "../include/soloud_audiosource.h"
 #include "../include/soloud_biquadresonantfilter.h"
@@ -38,6 +40,7 @@ freely, subject to the following restrictions:
 #include "../include/soloud_fader.h"
 #include "../include/soloud_fftfilter.h"
 #include "../include/soloud_bassboostfilter.h"
+#include "../include/soloud_virtualfilter.h"
 #include "../include/soloud_filter.h"
 #include "../include/soloud_speech.h"
 #include "../include/soloud_wav.h"
@@ -1823,6 +1826,46 @@ void TedSid_stop(void * aClassPtr)
 {
 	TedSid * cl = (TedSid *)aClassPtr;
 	cl->stop();
+}
+
+unsigned int VirtualFilter_increment(unsigned int delta)
+{
+  static unsigned int filter_count = 0;
+  unsigned int count = filter_count;
+  filter_count += delta;
+  return count;
+}
+
+unsigned int VirtualFilter_count()
+{
+  return VirtualFilter_increment(0);
+}
+
+VirtualFilterInstance *VirtualFilter_get_or_set(unsigned int id, VirtualFilterInstance *filter)
+{
+  static VirtualFilterInstance *filters[MAXIMUM_VIRTUAL_FILTERS];
+  if (filter)
+    filters[id] = filter;
+  return filters[id];
+}
+
+unsigned int VirtualFilter_create(int aNumParams,
+                                  void (*aConstructor)(), void (*aDestructor)(),
+                                  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+                                  void (*aFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int))
+{
+  unsigned int id = VirtualFilter_increment(1);
+  VirtualFilter *filter =
+    new VirtualFilter(id, aNumParams,aConstructor, aDestructor, aFilter, aFilterChannel);
+  VirtualFilter_get_or_set(id, (VirtualFilterInstance *)filter->createInstance());
+  delete filter;
+
+  return id;
+}
+
+VirtualFilterInstance *VirtualFilter_get(int id)
+{
+  return VirtualFilter_get_or_set(id, 0);
 }
 
 } // extern "C"
