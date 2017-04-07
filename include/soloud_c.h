@@ -110,6 +110,13 @@ typedef void * Monotone;
 typedef void * TedSid;
 typedef void * VirtualFilter;
 typedef void * VirtualFilterInstance;
+typedef void * VirtualAudioSource;
+typedef void * VirtualAudioSourceInstance;
+typedef void * VirtualAudioCollider;
+typedef void * VirtualAudioColliderInstance;
+typedef void * VirtualAudioAttenuator;
+typedef void * VirtualAudioAttenuatorInstance;
+typedef void * AudioSourceInstance3dData;
 typedef void * File;
 
 typedef double time;
@@ -497,6 +504,34 @@ unsigned int VirtualFilter_create(int aNumParams,
                                   void (*aFilterChannel)(float *,  unsigned int,  float, time));
 VirtualFilterInstance *VirtualFilter_remove(int id);
 VirtualFilterInstance *VirtualFilter_get(int id);
+
+/* 
+ * VirtualAudioSource
+ */
+unsigned int VirtualAudioSource_maximum_limit();
+unsigned int VirtualAudioSource_create(void (*aSetFilter)(unsigned int, Filter*),
+                                       void (*aConstructor)(), void (*aDestructor)(),
+                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),
+                                       void (*aSeek)(float, float *, int), int (*aRewind)(),
+                                       float (*aGetInfo)(unsigned int));
+VirtualAudioSourceInstance *VirtualAudioSource_remove(int id);
+VirtualAudioSourceInstance *VirtualAudioSource_get(int id);
+
+/* 
+ * VirtualAudioSource
+ */
+unsigned int VirtualAudioCollider_maximum_limit();
+unsigned int VirtualAudioCollider_create(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int));
+VirtualAudioColliderInstance *VirtualAudioCollider_remove(int id);
+VirtualAudioColliderInstance *VirtualAudioCollider_get(int id);
+
+/* 
+ * VirtualAudioAttenuator
+ */
+unsigned int VirtualAudioAttenuator_maximum_limit();
+unsigned int VirtualAudioAttenuator_create(float (*aAttenuate)(float, float, float, float));
+VirtualAudioAttenuatorInstance *VirtualAudioAttenuator_remove(int id);
+VirtualAudioAttenuatorInstance *VirtualAudioAttenuator_get(int id);
 #ifdef  __cplusplus
 } // extern "C"
 #endif
