@@ -502,8 +502,8 @@ unsigned int VirtualFilter_create(int aNumParams,
                                   void (*aConstructor)(), void (*aDestructor)(),
                                   void (*aFilter)(float *, unsigned int, unsigned int, float, time),
                                   void (*aFilterChannel)(float *,  unsigned int,  float, time));
-VirtualFilterInstance *VirtualFilter_remove(int id);
-VirtualFilterInstance *VirtualFilter_get(int id);
+void VirtualFilter_remove(int id);
+void *VirtualFilter_get(int id);
 
 /* 
  * VirtualAudioSource
@@ -514,24 +514,24 @@ unsigned int VirtualAudioSource_create(void (*aSetFilter)(unsigned int, Filter*)
                                        void (*aGetAudio)(float *, int), int (*aHasEnded)(),
                                        void (*aSeek)(float, float *, int), int (*aRewind)(),
                                        float (*aGetInfo)(unsigned int));
-VirtualAudioSourceInstance *VirtualAudioSource_remove(int id);
-VirtualAudioSourceInstance *VirtualAudioSource_get(int id);
+void VirtualAudioSource_remove(int id);
+void *VirtualAudioSource_get(int id);
 
 /* 
  * VirtualAudioSource
  */
 unsigned int VirtualAudioCollider_maximum_limit();
 unsigned int VirtualAudioCollider_create(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int));
-VirtualAudioColliderInstance *VirtualAudioCollider_remove(int id);
-VirtualAudioColliderInstance *VirtualAudioCollider_get(int id);
+void VirtualAudioCollider_remove(int id);
+void *VirtualAudioCollider_get(int id);
 
 /* 
  * VirtualAudioAttenuator
  */
 unsigned int VirtualAudioAttenuator_maximum_limit();
 unsigned int VirtualAudioAttenuator_create(float (*aAttenuate)(float, float, float, float));
-VirtualAudioAttenuatorInstance *VirtualAudioAttenuator_remove(int id);
-VirtualAudioAttenuatorInstance *VirtualAudioAttenuator_get(int id);
+void VirtualAudioAttenuator_remove(int id);
+void *VirtualAudioAttenuator_get(int id);
 #ifdef  __cplusplus
 } // extern "C"
 #endif
