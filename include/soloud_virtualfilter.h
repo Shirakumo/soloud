@@ -34,10 +34,10 @@
 
 namespace SoLoud
 {
-  class VirtualFilter;
-
   // Maximum number of virtual filters
   const unsigned int MAXIMUM_VIRTUAL_FILTERS = 128;
+
+  class VirtualFilter;
   
   class VirtualFilterInstance : public FilterInstance
   {
@@ -70,6 +70,13 @@ namespace SoLoud
     void (*mFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int);
 
   public:
+    enum CAPI_ACTION
+    {
+      GET,
+      SET,
+      REMOVE
+    };
+
     virtual FilterInstance *createInstance();
     VirtualFilter(unsigned int aId, int aNumParams,
                   void (*aConstructor)(), void (*aDestructor)(),

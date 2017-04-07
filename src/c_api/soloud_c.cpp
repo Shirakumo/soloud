@@ -1828,25 +1828,57 @@ void TedSid_stop(void * aClassPtr)
 	cl->stop();
 }
 
+unsigned int VirtualFilter_maximum_limit()
+{
+  return MAXIMUM_VIRTUAL_FILTERS; // Defined in soloud_virtualfilter.h
+}
+
+VirtualFilterInstance *VirtualFilter_manage(VirtualFilter::CAPI_ACTION action, unsigned int id, VirtualFilterInstance *filter)
+{
+  static VirtualFilterInstance *filters[MAXIMUM_VIRTUAL_FILTERS];
+  unsigned int index = id - 1;
+  VirtualFilterInstance *old_filter = filters[index];
+  switch (action)
+  {
+  case VirtualFilter::GET:
+    if (old_filter)
+      return old_filter;
+    break;
+  case VirtualFilter::SET:
+    if (old_filter)
+    {
+      old_filter = 0;
+      VirtualFilter_manage(VirtualFilter::REMOVE, id, 0);
+    }
+    filters[index] = filter;
+    return filter;
+  case VirtualFilter::REMOVE:
+    if (old_filter)
+    {
+      filters[index] = 0;
+      delete old_filter;
+    }
+    break;
+  default:
+    break;
+  }
+  return 0;
+}
+
 unsigned int VirtualFilter_increment(unsigned int delta)
 {
   static unsigned int filter_count = 0;
   unsigned int count = filter_count;
   filter_count += delta;
-  return count;
-}
-
-unsigned int VirtualFilter_count()
-{
-  return VirtualFilter_increment(0);
-}
-
-VirtualFilterInstance *VirtualFilter_get_or_set(unsigned int id, VirtualFilterInstance *filter)
-{
-  static VirtualFilterInstance *filters[MAXIMUM_VIRTUAL_FILTERS];
-  if (filter)
-    filters[id] = filter;
-  return filters[id];
+  filter_count = (filter_count % VirtualFilter_maximum_limit());
+  while (VirtualFilter_manage(VirtualFilter::GET, filter_count, 0))
+  {
+    filter_count += 1;
+    filter_count = (filter_count % VirtualFilter_maximum_limit());
+    if (filter_count == count)
+      return 0;
+  }
+  return count + 1;
 }
 
 unsigned int VirtualFilter_create(int aNumParams,
@@ -1855,17 +1887,25 @@ unsigned int VirtualFilter_create(int aNumParams,
                                   void (*aFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int))
 {
   unsigned int id = VirtualFilter_increment(1);
+  if (id == 0)
+    return 0;
+
   VirtualFilter *filter =
     new VirtualFilter(id, aNumParams,aConstructor, aDestructor, aFilter, aFilterChannel);
-  VirtualFilter_get_or_set(id, (VirtualFilterInstance *)filter->createInstance());
+  VirtualFilter_manage(VirtualFilter::SET, id, (VirtualFilterInstance *)filter->createInstance());
   delete filter;
 
   return id;
 }
 
+void VirtualFilter_remove(unsigned int id)
+{
+  VirtualFilter_manage(VirtualFilter::REMOVE, id, 0);
+}
+
 VirtualFilterInstance *VirtualFilter_get(int id)
 {
-  return VirtualFilter_get_or_set(id, 0);
+  return VirtualFilter_manage(VirtualFilter::GET, id, 0);
 }
 
 } // extern "C"
