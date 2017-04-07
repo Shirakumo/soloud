@@ -1882,8 +1882,8 @@ unsigned int VirtualFilter_increment(unsigned int delta)
 }
 
 unsigned int VirtualFilter_create(int aNumParams, void (*aConstructor)(), void (*aDestructor)(),
-				  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-				  void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
+                                  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+                                  void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
 {
 	unsigned int id = VirtualFilter_increment(1);
 	if (id == 0)
@@ -1907,5 +1907,84 @@ VirtualFilterInstance *VirtualFilter_get(int id)
 	return VirtualFilter_manage(VirtualFilter::GET, id, 0);
 }
 
-} // extern "C"
+unsigned int VirtualAudioSource_maximum_limit()
+{
+	return MAXIMUM_VIRTUAL_AUDIOSOURCES; // Defined in soloud_virtualaudiosource.h
+}
 
+VirtualAudioSource *VirtualAudioSource_manage(VirtualAudioSource::CAPI_ACTION action, unsigned int id, VirtualAudioSource *audiosource)
+{
+	static VirtualAudioSource *audiosources[MAXIMUM_VIRTUAL_AUDIOSOURCES];
+	unsigned int index = id - 1;
+	VirtualAudioSource *old_audiosource = audiosources[index];
+	switch (action)
+	{
+	case VirtualAudioSource::GET:
+		if (old_audiosource)
+			return old_audiosource;
+		break;
+	case VirtualAudioSource::SET:
+		if (old_audiosource)
+		{
+			old_audiosource = 0;
+			VirtualAudioSource_manage(VirtualAudioSource::REMOVE, id, 0);
+		}
+		audiosources[index] = audiosource;
+		return audiosource;
+	case VirtualAudioSource::REMOVE:
+		if (old_audiosource)
+		{
+			audiosources[index] = 0;
+			delete old_audiosource;
+		}
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
+
+unsigned int VirtualAudioSource_increment(unsigned int delta)
+{
+	static unsigned int audiosource_count = 0;
+	unsigned int count = audiosource_count;
+	audiosource_count += delta;
+	audiosource_count = (audiosource_count % VirtualAudioSource_maximum_limit());
+	while (VirtualAudioSource_manage(VirtualAudioSource::GET, audiosource_count, 0))
+	{
+		audiosource_count += 1;
+		audiosource_count = (audiosource_count % VirtualAudioSource_maximum_limit());
+		if (audiosource_count == count)
+			return 0;
+	}
+	return count + 1;
+}
+
+unsigned int VirtualAudioSource_create(void (*aConstructor)(), void (*aDestructor)(),
+                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),
+                                       void (*aSeek)(float, float *, int), int (*aRewind)(),
+                                       float (*aGetInfo)(unsigned int))
+{
+	unsigned int id = VirtualAudioSource_increment(1);
+	if (id == 0)
+		return 0;
+
+	VirtualAudioSource *audiosource =
+		new VirtualAudioSource(id, aNumParams,aConstructor, aDestructor, aGetAudio,
+		                       aHasEnded, aSeek, aRewind, aGetInfo);
+	VirtualAudioSource_manage(VirtualAudioSource::SET, id, audiosource);
+
+	return id;
+}
+
+void VirtualAudioSource_remove(unsigned int id)
+{
+	VirtualAudioSource_manage(VirtualAudioSource::REMOVE, id, 0);
+}
+
+VirtualAudioSource *VirtualAudioSource_get(int id)
+{
+	return VirtualAudioSource_manage(VirtualAudioSource::GET, id, 0);
+}
+
+} // extern "C"

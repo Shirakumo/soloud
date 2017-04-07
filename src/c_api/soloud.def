@@ -300,7 +300,11 @@ EXPORTS
 	TedSid_setInaudibleBehavior
 	TedSid_setFilter
 	TedSid_stop
-        VirtualFilter_maximum_limit
-        VirtualFilter_create
-        VirtualFilter_remove
-        VirtualFilter_get
+	VirtualFilter_maximum_limit
+	VirtualFilter_create
+	VirtualFilter_remove
+	VirtualFilter_get
+	VirtualAudioSource_maximum_limit
+	VirtualAudioSource_create
+	VirtualAudioSource_remove
+	VirtualAudioSource_get
