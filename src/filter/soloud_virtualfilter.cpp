@@ -103,4 +103,9 @@ namespace SoLoud
 	{
 		return new VirtualFilterInstance(this, mId, mNumParams, mConstructor, mDestructor, mFilter, mFilterChannel);
 	}
+
+	unsigned int VirtualFilter::getId()
+	{
+		return mId;
+	}
 }

@@ -83,6 +83,7 @@ namespace SoLoud
 		VirtualFilter(unsigned int aId, int aNumParams, void (*aConstructor)(), void (*aDestructor)(),
 		              void (*aFilter)(float *, unsigned int, unsigned int, float, time),
 		              void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
+		unsigned int getId();
 	};
 }
 
