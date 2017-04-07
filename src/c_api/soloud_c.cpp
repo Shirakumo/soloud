@@ -1960,7 +1960,8 @@ unsigned int VirtualAudioSource_increment(unsigned int delta)
 	return count + 1;
 }
 
-unsigned int VirtualAudioSource_create(void (*aConstructor)(), void (*aDestructor)(),
+unsigned int VirtualAudioSource_create(void (*aSetFilter)(unsigned int, Filter*),
+									   void (*aConstructor)(), void (*aDestructor)(),
                                        void (*aGetAudio)(float *, int), int (*aHasEnded)(),
                                        void (*aSeek)(float, float *, int), int (*aRewind)(),
                                        float (*aGetInfo)(unsigned int))
@@ -1970,8 +1971,8 @@ unsigned int VirtualAudioSource_create(void (*aConstructor)(), void (*aDestructo
 		return 0;
 
 	VirtualAudioSource *audiosource =
-		new VirtualAudioSource(id, aConstructor, aDestructor, aGetAudio,
-		                       aHasEnded, aSeek, aRewind, aGetInfo);
+		new VirtualAudioSource(id, aSetFilter, aConstructor, aDestructor,
+		                       aGetAudio, aHasEnded, aSeek, aRewind, aGetInfo);
 	VirtualAudioSource_manage(VirtualAudioSource::SET, id, audiosource);
 
 	return id;

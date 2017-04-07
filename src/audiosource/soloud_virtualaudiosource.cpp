@@ -96,7 +96,7 @@ namespace SoLoud
 	}
 
 
-	VirtualAudioSource::VirtualAudioSource(unsigned int aId, void (*aSetFilter)(unsigned int, Filter*)
+	VirtualAudioSource::VirtualAudioSource(unsigned int aId, void (*aSetFilter)(unsigned int, Filter*),
 	                                       void (*aConstructor)(), void (*aDestructor)(),
 	                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),
 	                                       void (*aSeek)(float, float *, int), int (*aRewind)(),

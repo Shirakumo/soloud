@@ -70,6 +70,7 @@ namespace SoLoud
 	class VirtualAudioSource : public AudioSource
 	{
 		unsigned int mId;
+		void (*mSetFilter)(unsigned int, Filter*);
 
 		void (*mConstructor)();
 		void (*mDestructor)();
@@ -89,7 +90,7 @@ namespace SoLoud
 
 		virtual void setFilter(unsigned int aFilterId, Filter *aFilter);
 		virtual AudioSourceInstance *createInstance();
-		VirtualAudioSource(unsigned int aId,
+		VirtualAudioSource(unsigned int aId, void (*aSetFilter)(unsigned int, Filter*),
 		                   void (*aConstructor)(), void (*aDestructor)(),
 		                   void (*aGetAudio)(float *, int), int (*aHasEnded)(),
 		                   void (*aSeek)(float, float *, int), int (*aRewind)(),
