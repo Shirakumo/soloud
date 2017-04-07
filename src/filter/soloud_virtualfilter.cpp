@@ -33,9 +33,9 @@
 namespace SoLoud
 {
 	VirtualFilterInstance::VirtualFilterInstance(VirtualFilter *aParent, unsigned int aId, int aNumParams,
-						     void (*aConstructor)(), void (*aDestructor)(),
-						     void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-						     void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
+	                                             void (*aConstructor)(), void (*aDestructor)(),
+	                                             void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+	                                             void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
 	{
 		mId = aId;
 		mParent = aParent;
@@ -62,8 +62,8 @@ namespace SoLoud
 	}
 
 	void VirtualFilterInstance::filter(float *aBuffer, unsigned int aSamples,
-					   unsigned int aChannels, float aSamplerate,
-					   time aTime)
+	                                   unsigned int aChannels, float aSamplerate,
+	                                   time aTime)
 	{
 		if (mFilter)
 		{
@@ -73,9 +73,9 @@ namespace SoLoud
 	}
 
 	void VirtualFilterInstance::filterChannel(float *aBuffer, unsigned int aSamples,
-						  float aSamplerate, time aTime,
-						  unsigned int aChannel,
-						  unsigned int aChannels)
+	                                          float aSamplerate, time aTime,
+	                                          unsigned int aChannel,
+	                                          unsigned int aChannels)
 	{
 		if (mFilterChannel)
 		{
@@ -86,9 +86,9 @@ namespace SoLoud
 
 	
 	VirtualFilter::VirtualFilter(unsigned int aId, int aNumParams,
-				     void (*aConstructor)(), void (*aDestructor)(),
-				     void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-				     void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
+	                             void (*aConstructor)(), void (*aDestructor)(),
+	                             void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+	                             void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
 	{
 		mId = aId;
 		mNumParams = aNumParams;

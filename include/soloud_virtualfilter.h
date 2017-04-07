@@ -50,13 +50,15 @@ namespace SoLoud
 
 	public:
 		virtual ~VirtualFilterInstance();
-		virtual void filter(float *aBuffer, unsigned int aSamples, unsigned int aChannels, float aSamplerate, time aTime);
-		virtual void filterChannel(float *aBuffer, unsigned int aSamples, float aSamplerate, time aTime, unsigned int aChannel, unsigned int aChannels);
+		virtual void filter(float *aBuffer, unsigned int aSamples, unsigned int aChannels,
+		                    float aSamplerate, time aTime);
+		virtual void filterChannel(float *aBuffer, unsigned int aSamples, float aSamplerate,
+		                           time aTime, unsigned int aChannel, unsigned int aChannels);
 		
 		VirtualFilterInstance(VirtualFilter *aParent, unsigned int aId, int aNumParams,
-				      void (*aConstructor)(), void (*aDestructor)(),
-				      void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-				      void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
+		                      void (*aConstructor)(), void (*aDestructor)(),
+		                      void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+		                      void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
 		unsigned int getId();
 	};
 
@@ -78,10 +80,9 @@ namespace SoLoud
 		};
 
 		virtual FilterInstance *createInstance();
-		VirtualFilter(unsigned int aId, int aNumParams,
-			      void (*aConstructor)(), void (*aDestructor)(),
-			      void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-			      void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
+		VirtualFilter(unsigned int aId, int aNumParams, void (*aConstructor)(), void (*aDestructor)(),
+		              void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+		              void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
 	};
 }
 
