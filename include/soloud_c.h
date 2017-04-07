@@ -490,11 +490,12 @@ void TedSid_stop(TedSid * aTedSid);
 /* 
  * VirtualFilter
  */
-unsigned int VirtualFilter_count();
+unsigned int VirtualFilter_maximum_limit();
 unsigned int VirtualFilter_create(int aNumParams,
                                   void (*aConstructor)(), void (*aDestructor)(),
                                   void (*aFilter)(float *, unsigned int, unsigned int, float, time),
                                   void (*aFilterChannel)(float *,  unsigned int,  float, time));
+VirtualFilterInstance *VirtualFilter_remove(int id);
 VirtualFilterInstance *VirtualFilter_get(int id);
 #ifdef  __cplusplus
 } // extern "C"
