@@ -33,6 +33,7 @@ freely, subject to the following restrictions:
 
 #include "../include/soloud.h"
 #include "../include/soloud_audiosource.h"
+#include "../include/soloud_virtualaudiosource.h"
 #include "../include/soloud_biquadresonantfilter.h"
 #include "../include/soloud_lofifilter.h"
 #include "../include/soloud_bus.h"
@@ -1969,7 +1970,7 @@ unsigned int VirtualAudioSource_create(void (*aConstructor)(), void (*aDestructo
 		return 0;
 
 	VirtualAudioSource *audiosource =
-		new VirtualAudioSource(id, aNumParams,aConstructor, aDestructor, aGetAudio,
+		new VirtualAudioSource(id, aConstructor, aDestructor, aGetAudio,
 		                       aHasEnded, aSeek, aRewind, aGetInfo);
 	VirtualAudioSource_manage(VirtualAudioSource::SET, id, audiosource);
 
