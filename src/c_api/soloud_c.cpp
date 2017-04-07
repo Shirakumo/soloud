@@ -2000,29 +2000,29 @@ VirtualAudioCollider *VirtualAudioCollider_manage(VirtualAudioSource::CAPI_ACTIO
 	unsigned int index = id - 1;
 	VirtualAudioCollider *old_audiocollider = audiocolliders[index];
 	switch (action)
+	{
+	case VirtualAudioSource::GET:
+		if (old_audiocollider)
+			return old_audiocollider;
+		break;
+	case VirtualAudioSource::SET:
+		if (old_audiocollider)
 		{
-		case VirtualAudioSource::GET:
-			if (old_audiocollider)
-				return old_audiocollider;
-			break;
-		case VirtualAudioSource::SET:
-			if (old_audiocollider)
-				{
-					old_audiocollider = 0;
-					VirtualAudioCollider_manage(VirtualAudioSource::REMOVE, id, 0);
-				}
-			audiocolliders[index] = audiocollider;
-			return audiocollider;
-		case VirtualAudioSource::REMOVE:
-			if (old_audiocollider)
-				{
-					audiocolliders[index] = 0;
-					delete old_audiocollider;
-				}
-			break;
-		default:
-			break;
+			old_audiocollider = 0;
+			VirtualAudioCollider_manage(VirtualAudioSource::REMOVE, id, 0);
 		}
+		audiocolliders[index] = audiocollider;
+		return audiocollider;
+	case VirtualAudioSource::REMOVE:
+		if (old_audiocollider)
+		{
+			audiocolliders[index] = 0;
+			delete old_audiocollider;
+		}
+		break;
+	default:
+		break;
+	}
 	return 0;
 }
 
@@ -2033,12 +2033,12 @@ unsigned int VirtualAudioCollider_increment(unsigned int delta)
 	audiocollider_count += delta;
 	audiocollider_count = (audiocollider_count % VirtualAudioCollider_maximum_limit());
 	while (VirtualAudioCollider_manage(VirtualAudioSource::GET, audiocollider_count, 0))
-		{
-			audiocollider_count += 1;
-			audiocollider_count = (audiocollider_count % VirtualAudioCollider_maximum_limit());
-			if (audiocollider_count == count)
-				return 0;
-		}
+	{
+		audiocollider_count += 1;
+		audiocollider_count = (audiocollider_count % VirtualAudioCollider_maximum_limit());
+		if (audiocollider_count == count)
+			return 0;
+	}
 	return count + 1;
 }
 
@@ -2076,29 +2076,29 @@ VirtualAudioAttenuator *VirtualAudioAttenuator_manage(VirtualAudioSource::CAPI_A
 	unsigned int index = id - 1;
 	VirtualAudioAttenuator *old_audioattenuator = audioattenuators[index];
 	switch (action)
+	{
+	case VirtualAudioSource::GET:
+		if (old_audioattenuator)
+			return old_audioattenuator;
+		break;
+	case VirtualAudioSource::SET:
+		if (old_audioattenuator)
 		{
-		case VirtualAudioSource::GET:
-			if (old_audioattenuator)
-				return old_audioattenuator;
-			break;
-		case VirtualAudioSource::SET:
-			if (old_audioattenuator)
-				{
-					old_audioattenuator = 0;
-					VirtualAudioAttenuator_manage(VirtualAudioSource::REMOVE, id, 0);
-				}
-			audioattenuators[index] = audioattenuator;
-			return audioattenuator;
-		case VirtualAudioSource::REMOVE:
-			if (old_audioattenuator)
-				{
-					audioattenuators[index] = 0;
-					delete old_audioattenuator;
-				}
-			break;
-		default:
-			break;
+			old_audioattenuator = 0;
+			VirtualAudioAttenuator_manage(VirtualAudioSource::REMOVE, id, 0);
 		}
+		audioattenuators[index] = audioattenuator;
+		return audioattenuator;
+	case VirtualAudioSource::REMOVE:
+		if (old_audioattenuator)
+		{
+			audioattenuators[index] = 0;
+			delete old_audioattenuator;
+		}
+		break;
+	default:
+		break;
+	}
 	return 0;
 }
 
@@ -2109,12 +2109,12 @@ unsigned int VirtualAudioAttenuator_increment(unsigned int delta)
 	audioattenuator_count += delta;
 	audioattenuator_count = (audioattenuator_count % VirtualAudioAttenuator_maximum_limit());
 	while (VirtualAudioAttenuator_manage(VirtualAudioSource::GET, audioattenuator_count, 0))
-		{
-			audioattenuator_count += 1;
-			audioattenuator_count = (audioattenuator_count % VirtualAudioAttenuator_maximum_limit());
-			if (audioattenuator_count == count)
-				return 0;
-		}
+	{
+		audioattenuator_count += 1;
+		audioattenuator_count = (audioattenuator_count % VirtualAudioAttenuator_maximum_limit());
+		if (audioattenuator_count == count)
+			return 0;
+	}
 	return count + 1;
 }
 
