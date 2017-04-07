@@ -33,9 +33,29 @@
 #include "soloud.h"
 
 namespace SoLoud
-{
+{	
 	// Maximum number of virtual audio sources
 	const unsigned int MAXIMUM_VIRTUAL_AUDIOSOURCES = 128;
+	const unsigned int MAXIMUM_VIRTUAL_AUDIOCOLLIDERS = 128;
+	const unsigned int MAXIMUM_VIRTUAL_AUDIOATTENUATORS = 128;
+	
+
+	class VirtualAudioCollider
+	{
+		float (*mCollide)(Soloud *, AudioSourceInstance3dData *, int);
+	public:
+		VirtualAudioCollider(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int));
+		virtual float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData);
+	};
+
+	class VirtualAudioAttenuator
+	{
+		float (*mAttenuate)(float, float, float, float);
+	public:
+		VirtualAudioAttenuator(float (*aAttenuate)(float, float, float, float));
+		virtual float attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor);
+	};
+
 
 	class VirtualAudioSource;
 	

@@ -32,6 +32,30 @@
 
 namespace SoLoud
 {
+	VirtualAudioCollider::VirtualAudioCollider(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int))
+	{
+		mCollide = aCollide;
+	}
+	
+	float VirtualAudioCollider::collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData, int aUserData)
+	{
+		if (mCollide)
+			mCollide(aSoloud, aAudioInstance3dData, aUserData);
+	}
+
+
+	VirtualAudioAttenuator::VirtualAudioAttenuator(float (*aAttenuate)(float, float, float, float))
+	{
+		mAttenuate = aAttenuate;
+	}
+
+	float VirtualAudioAttenuator::attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor)
+	{
+		if (mAttenuate)
+			mAttenuate(aDistance, aMinDistance, aMaxDistance, aRolloffFactor);
+	}
+	
+	
 	VirtualAudioSourceInstance::VirtualAudioSourceInstance(VirtualAudioSource *aParent, unsigned int aId,
 	                                                       void (*aConstructor)(), void (*aDestructor)(),
 	                                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),

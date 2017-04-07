@@ -1988,4 +1988,156 @@ VirtualAudioSource *VirtualAudioSource_get(int id)
 	return VirtualAudioSource_manage(VirtualAudioSource::GET, id, 0);
 }
 
+
+unsigned int VirtualAudioCollider_maximum_limit()
+{
+	return MAXIMUM_VIRTUAL_AUDIOCOLLIDERS; // Defined in soloud_virtualaudiosource.h
+}
+
+VirtualAudioCollider *VirtualAudioCollider_manage(VirtualAudioSource::CAPI_ACTION action, unsigned int id, VirtualAudioCollider *audiocollider)
+{
+	static VirtualAudioCollider *audiocolliders[MAXIMUM_VIRTUAL_AUDIOCOLLIDERS];
+	unsigned int index = id - 1;
+	VirtualAudioCollider *old_audiocollider = audiocolliders[index];
+	switch (action)
+		{
+		case VirtualAudioSource::GET:
+			if (old_audiocollider)
+				return old_audiocollider;
+			break;
+		case VirtualAudioSource::SET:
+			if (old_audiocollider)
+				{
+					old_audiocollider = 0;
+					VirtualAudioCollider_manage(VirtualAudioSource::REMOVE, id, 0);
+				}
+			audiocolliders[index] = audiocollider;
+			return audiocollider;
+		case VirtualAudioSource::REMOVE:
+			if (old_audiocollider)
+				{
+					audiocolliders[index] = 0;
+					delete old_audiocollider;
+				}
+			break;
+		default:
+			break;
+		}
+	return 0;
+}
+
+unsigned int VirtualAudioCollider_increment(unsigned int delta)
+{
+	static unsigned int audiocollider_count = 0;
+	unsigned int count = audiocollider_count;
+	audiocollider_count += delta;
+	audiocollider_count = (audiocollider_count % VirtualAudioCollider_maximum_limit());
+	while (VirtualAudioCollider_manage(VirtualAudioSource::GET, audiocollider_count, 0))
+		{
+			audiocollider_count += 1;
+			audiocollider_count = (audiocollider_count % VirtualAudioCollider_maximum_limit());
+			if (audiocollider_count == count)
+				return 0;
+		}
+	return count + 1;
+}
+
+unsigned int VirtualAudioCollider_create(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int))
+{
+	unsigned int id = VirtualAudioCollider_increment(1);
+	if (id == 0)
+		return 0;
+
+	VirtualAudioCollider *audiocollider = new VirtualAudioCollider(aCollide);
+	VirtualAudioCollider_manage(VirtualAudioSource::SET, id, audiocollider);
+
+	return id;
+}
+
+void VirtualAudioCollider_remove(unsigned int id)
+{
+	VirtualAudioCollider_manage(VirtualAudioSource::REMOVE, id, 0);
+}
+
+VirtualAudioCollider *VirtualAudioCollider_get(int id)
+{
+	return VirtualAudioCollider_manage(VirtualAudioSource::GET, id, 0);
+}
+
+
+unsigned int VirtualAudioAttenuator_maximum_limit()
+{
+	return MAXIMUM_VIRTUAL_AUDIOATTENUATORS; // Defined in soloud_virtualaudiosource.h
+}
+
+VirtualAudioAttenuator *VirtualAudioAttenuator_manage(VirtualAudioSource::CAPI_ACTION action, unsigned int id, VirtualAudioAttenuator *audioattenuator)
+{
+	static VirtualAudioAttenuator *audioattenuators[MAXIMUM_VIRTUAL_AUDIOATTENUATORS];
+	unsigned int index = id - 1;
+	VirtualAudioAttenuator *old_audioattenuator = audioattenuators[index];
+	switch (action)
+		{
+		case VirtualAudioSource::GET:
+			if (old_audioattenuator)
+				return old_audioattenuator;
+			break;
+		case VirtualAudioSource::SET:
+			if (old_audioattenuator)
+				{
+					old_audioattenuator = 0;
+					VirtualAudioAttenuator_manage(VirtualAudioSource::REMOVE, id, 0);
+				}
+			audioattenuators[index] = audioattenuator;
+			return audioattenuator;
+		case VirtualAudioSource::REMOVE:
+			if (old_audioattenuator)
+				{
+					audioattenuators[index] = 0;
+					delete old_audioattenuator;
+				}
+			break;
+		default:
+			break;
+		}
+	return 0;
+}
+
+unsigned int VirtualAudioAttenuator_increment(unsigned int delta)
+{
+	static unsigned int audioattenuator_count = 0;
+	unsigned int count = audioattenuator_count;
+	audioattenuator_count += delta;
+	audioattenuator_count = (audioattenuator_count % VirtualAudioAttenuator_maximum_limit());
+	while (VirtualAudioAttenuator_manage(VirtualAudioSource::GET, audioattenuator_count, 0))
+		{
+			audioattenuator_count += 1;
+			audioattenuator_count = (audioattenuator_count % VirtualAudioAttenuator_maximum_limit());
+			if (audioattenuator_count == count)
+				return 0;
+		}
+	return count + 1;
+}
+
+unsigned int VirtualAudioAttenuator_create(float (*aAttenuate)(float, float, float, float))
+{
+	unsigned int id = VirtualAudioAttenuator_increment(1);
+	if (id == 0)
+		return 0;
+
+	VirtualAudioAttenuator *audioattenuator = new VirtualAudioAttenuator(aAttenuate);
+	VirtualAudioAttenuator_manage(VirtualAudioSource::SET, id, audioattenuator);
+
+	return id;
+}
+
+void VirtualAudioAttenuator_remove(unsigned int id)
+{
+	VirtualAudioAttenuator_manage(VirtualAudioSource::REMOVE, id, 0);
+}
+
+VirtualAudioAttenuator *VirtualAudioAttenuator_get(int id)
+{
+	return VirtualAudioAttenuator_manage(VirtualAudioSource::GET, id, 0);
+}
+
 } // extern "C"

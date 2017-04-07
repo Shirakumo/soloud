@@ -308,3 +308,11 @@ EXPORTS
 	VirtualAudioSource_create
 	VirtualAudioSource_remove
 	VirtualAudioSource_get
+	VirtualAudioCollider_maximum_limit
+	VirtualAudioCollider_create
+	VirtualAudioCollider_remove
+	VirtualAudioCollider_get
+	VirtualAudioAttenuator_maximum_limit
+	VirtualAudioAttenuator_create
+	VirtualAudioAttenuator_remove
+	VirtualAudioAttenuator_get
