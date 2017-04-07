@@ -1833,11 +1833,11 @@ unsigned int VirtualFilter_maximum_limit()
 	return MAXIMUM_VIRTUAL_FILTERS; // Defined in soloud_virtualfilter.h
 }
 
-VirtualFilterInstance *VirtualFilter_manage(VirtualFilter::CAPI_ACTION action, unsigned int id, VirtualFilterInstance *filter)
+VirtualFilter *VirtualFilter_manage(VirtualFilter::CAPI_ACTION action, unsigned int id, VirtualFilter *filter)
 {
-	static VirtualFilterInstance *filters[MAXIMUM_VIRTUAL_FILTERS];
+	static VirtualFilter *filters[MAXIMUM_VIRTUAL_FILTERS];
 	unsigned int index = id - 1;
-	VirtualFilterInstance *old_filter = filters[index];
+	VirtualFilter *old_filter = filters[index];
 	switch (action)
 	{
 	case VirtualFilter::GET:
@@ -1891,8 +1891,7 @@ unsigned int VirtualFilter_create(int aNumParams, void (*aConstructor)(), void (
 
 	VirtualFilter *filter =
 		new VirtualFilter(id, aNumParams,aConstructor, aDestructor, aFilter, aFilterChannel);
-	VirtualFilter_manage(VirtualFilter::SET, id, (VirtualFilterInstance *)filter->createInstance());
-	delete filter;
+	VirtualFilter_manage(VirtualFilter::SET, id, filter);
 
 	return id;
 }
@@ -1902,7 +1901,7 @@ void VirtualFilter_remove(unsigned int id)
 	VirtualFilter_manage(VirtualFilter::REMOVE, id, 0);
 }
 
-VirtualFilterInstance *VirtualFilter_get(int id)
+VirtualFilter *VirtualFilter_get(int id)
 {
 	return VirtualFilter_manage(VirtualFilter::GET, id, 0);
 }
