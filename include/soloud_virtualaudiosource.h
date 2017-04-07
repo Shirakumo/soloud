@@ -87,6 +87,7 @@ namespace SoLoud
 			REMOVE
 		};
 
+		virtual void setFilter(unsigned int aFilterId, Filter *aFilter);
 		virtual AudioSourceInstance *createInstance();
 		VirtualAudioSource(unsigned int aId,
 		                   void (*aConstructor)(), void (*aDestructor)(),

@@ -96,13 +96,14 @@ namespace SoLoud
 	}
 
 
-	VirtualAudioSource::VirtualAudioSource(unsigned int aId,
+	VirtualAudioSource::VirtualAudioSource(unsigned int aId, void (*aSetFilter)(unsigned int, Filter*)
 	                                       void (*aConstructor)(), void (*aDestructor)(),
 	                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),
 	                                       void (*aSeek)(float, float *, int), int (*aRewind)(),
 	                                       float (*aGetInfo)(unsigned int))
 	{
 		mId = aId;
+		mSetFilter = aSetFilter;
 
 		mConstructor = aConstructor;
 		mDestructor = aDestructor;
@@ -116,6 +117,14 @@ namespace SoLoud
 	unsigned int VirtualAudioSource::getId()
 	{
 		return mId;
+	}
+
+	void VirtualAudioSource::setFilter(unsigned int aFilterId, Filter *aFilter)
+	{
+		if (mSetFilter)
+			mSetFilter(aFilterId, aFilter);
+		else
+			AudioSource::setFilter(aFilterId, aFilter);
 	}
 
 	AudioSourceInstance *VirtualAudioSource::createInstance()
