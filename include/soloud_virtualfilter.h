@@ -34,55 +34,55 @@
 
 namespace SoLoud
 {
-  // Maximum number of virtual filters
-  const unsigned int MAXIMUM_VIRTUAL_FILTERS = 128;
+	// Maximum number of virtual filters
+	const unsigned int MAXIMUM_VIRTUAL_FILTERS = 128;
 
-  class VirtualFilter;
-  
-  class VirtualFilterInstance : public FilterInstance
-  {
-    VirtualFilter *mParent;
-    unsigned int mId;
+	class VirtualFilter;
+	
+	class VirtualFilterInstance : public FilterInstance
+	{
+		VirtualFilter *mParent;
+		unsigned int mId;
 
-    void (*mDestructor)();
-    void (*mFilter)(float *, unsigned int, unsigned int, float, time);
-    void (*mFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int);
+		void (*mDestructor)();
+		void (*mFilter)(float *, unsigned int, unsigned int, float, time);
+		void (*mFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int);
 
-  public:
-    virtual ~VirtualFilterInstance();
-    virtual void filter(float *aBuffer, unsigned int aSamples, unsigned int aChannels, float aSamplerate, time aTime);
-    virtual void filterChannel(float *aBuffer, unsigned int aSamples, float aSamplerate, time aTime, unsigned int aChannel, unsigned int aChannels);
-    
-    VirtualFilterInstance(VirtualFilter *aParent, unsigned int aId, int aNumParams,
-                          void (*aConstructor)(), void (*aDestructor)(),
-                          void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-                          void (*aFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int));
-    unsigned int getId();
-  };
+	public:
+		virtual ~VirtualFilterInstance();
+		virtual void filter(float *aBuffer, unsigned int aSamples, unsigned int aChannels, float aSamplerate, time aTime);
+		virtual void filterChannel(float *aBuffer, unsigned int aSamples, float aSamplerate, time aTime, unsigned int aChannel, unsigned int aChannels);
+		
+		VirtualFilterInstance(VirtualFilter *aParent, unsigned int aId, int aNumParams,
+				      void (*aConstructor)(), void (*aDestructor)(),
+				      void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+				      void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
+		unsigned int getId();
+	};
 
-  class VirtualFilter : public Filter
-  {
-    unsigned int mId;
-    int mNumParams;
-    void (*mConstructor)();
-    void (*mDestructor)();
-    void (*mFilter)(float *, unsigned int, unsigned int, float, time);
-    void (*mFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int);
+	class VirtualFilter : public Filter
+	{
+		unsigned int mId;
+		int mNumParams;
+		void (*mConstructor)();
+		void (*mDestructor)();
+		void (*mFilter)(float *, unsigned int, unsigned int, float, time);
+		void (*mFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int);
 
-  public:
-    enum CAPI_ACTION
-    {
-      GET,
-      SET,
-      REMOVE
-    };
+	public:
+		enum CAPI_ACTION
+		{
+			GET,
+			SET,
+			REMOVE
+		};
 
-    virtual FilterInstance *createInstance();
-    VirtualFilter(unsigned int aId, int aNumParams,
-                  void (*aConstructor)(), void (*aDestructor)(),
-                  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-                  void (*aFilterChannel)(float *,  unsigned int,  float, time, unsigned int, unsigned int));
-  };
+		virtual FilterInstance *createInstance();
+		VirtualFilter(unsigned int aId, int aNumParams,
+			      void (*aConstructor)(), void (*aDestructor)(),
+			      void (*aFilter)(float *, unsigned int, unsigned int, float, time),
+			      void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int));
+	};
 }
 
 #endif // SOLOUD_VIRTUALFILTER_H
