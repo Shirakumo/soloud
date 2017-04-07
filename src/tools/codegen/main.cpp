@@ -39,6 +39,7 @@ char *gIncludeFile[] =
 {
 	"../include/soloud.h",
 	"../include/soloud_audiosource.h",
+	"../include/soloud_virtualaudiosource.h",
 	"../include/soloud_biquadresonantfilter.h",
 	"../include/soloud_lofifilter.h",
 	"../include/soloud_bus.h",
