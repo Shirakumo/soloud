@@ -300,19 +300,20 @@ EXPORTS
 	TedSid_setInaudibleBehavior
 	TedSid_setFilter
 	TedSid_stop
-	VirtualFilter_maximum_limit
 	VirtualFilter_create
-	VirtualFilter_remove
-	VirtualFilter_get
-	VirtualAudioSource_maximum_limit
+	VirtualFilter_destroy
+	VirtualFilter_setFilterCallback
+	VirtualFilter_setFilterChannelCallback
 	VirtualAudioSource_create
-	VirtualAudioSource_remove
-	VirtualAudioSource_get
-	VirtualAudioCollider_maximum_limit
+	VirtualAudioSource_destroy
+	VirtualAudioSource_setGetAudioCallback
+	VirtualAudioSource_setHasEndedCallback
+	VirtualAudioSource_setSeekCallback
+	VirtualAudioSource_setRewindCallback
+	VirtualAudioSource_setGetInfoCallback
 	VirtualAudioCollider_create
-	VirtualAudioCollider_remove
-	VirtualAudioCollider_get
-	VirtualAudioAttenuator_maximum_limit
+	VirtualAudioCollider_destroy
+	VirtualAudioCollider_setCollideCallback
 	VirtualAudioAttenuator_create
-	VirtualAudioAttenuator_remove
-	VirtualAudioAttenuator_get
+	VirtualAudioAttenuator_destroy
+	VirtualAudioAttenuator_setAttenuateCallback

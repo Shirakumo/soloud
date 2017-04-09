@@ -109,13 +109,9 @@ typedef void * Openmpt;
 typedef void * Monotone;
 typedef void * TedSid;
 typedef void * VirtualFilter;
-typedef void * VirtualFilterInstance;
 typedef void * VirtualAudioSource;
-typedef void * VirtualAudioSourceInstance;
 typedef void * VirtualAudioCollider;
-typedef void * VirtualAudioColliderInstance;
 typedef void * VirtualAudioAttenuator;
-typedef void * VirtualAudioAttenuatorInstance;
 typedef void * AudioSourceInstance3dData;
 typedef void * File;
 
@@ -497,41 +493,36 @@ void TedSid_stop(TedSid * aTedSid);
 /* 
  * VirtualFilter
  */
-unsigned int VirtualFilter_maximum_limit();
-unsigned int VirtualFilter_create(int aNumParams,
-                                  void (*aConstructor)(), void (*aDestructor)(),
-                                  void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-                                  void (*aFilterChannel)(float *,  unsigned int,  float, time));
-void VirtualFilter_remove(int id);
-void *VirtualFilter_get(int id);
+VirtualFilter *VirtualFilter_create(unsigned int classID);
+void VirtualFilter_destroy(VirtualAudioSource *filter);
+void VirtualFilter_setFilterCallback(void (*aFilter)(unsigned int, float *, unsigned int, unsigned int, float, time));
+void VirtualFilter_setFilterChannelCallback(void (*aFilterChannel)(unsigned int, float *,  unsigned int,  float, time));
 
 /* 
  * VirtualAudioSource
  */
-unsigned int VirtualAudioSource_maximum_limit();
-unsigned int VirtualAudioSource_create(void (*aSetFilter)(unsigned int, Filter*),
-                                       void (*aConstructor)(), void (*aDestructor)(),
-                                       void (*aGetAudio)(float *, int), int (*aHasEnded)(),
-                                       void (*aSeek)(float, float *, int), int (*aRewind)(),
-                                       float (*aGetInfo)(unsigned int));
-void VirtualAudioSource_remove(int id);
-void *VirtualAudioSource_get(int id);
+VirtualAudioSource *VirtualAudioSource_create(unsigned int classID);
+void VirtualAudioSource_destroy(VirtualAudioSource *source);
+void VirtualAudioSource_setGetAudioCallback(void (*aGetAudio)(unsigned int, float *, int));
+void VirtualAudioSource_setHasEndedCallback(int (*aHasEnded)(unsigned int));
+void VirtualAudioSource_setSeekCallback(void (*aSeek)(unsigned int, float, float *, int));
+void VirtualAudioSource_setRewindCallback(int (*aRewind)(unsigned int));
+void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(unsigned int, unsigned int));
 
-/* 
- * VirtualAudioSource
+/*
+ * VirtualAudioCollider
  */
-unsigned int VirtualAudioCollider_maximum_limit();
-unsigned int VirtualAudioCollider_create(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int));
-void VirtualAudioCollider_remove(int id);
-void *VirtualAudioCollider_get(int id);
+VirtualAudioCollider *VirtualAudioCollider_create(unsigned int classID);
+void VirtualAudioCollider_destroy(VirtualAudioCollider *source);
+void VirtualAudioCollider_setCollideCallback(float (*collideC)(unsigned int, void *, void *, int));
 
-/* 
+/*
  * VirtualAudioAttenuator
  */
-unsigned int VirtualAudioAttenuator_maximum_limit();
-unsigned int VirtualAudioAttenuator_create(float (*aAttenuate)(float, float, float, float));
-void VirtualAudioAttenuator_remove(int id);
-void *VirtualAudioAttenuator_get(int id);
+VirtualAudioAttenuator *VirtualAudioAttenuator_create(unsigned int classID);
+void VirtualAudioAttenuator_destroy(VirtualAudioAttenuator *source);
+void VirtualAudioAttenuator_setAttenuateCallback(float (*collideC)(unsigned int, void *, void *, int));
+	
 #ifdef  __cplusplus
 } // extern "C"
 #endif

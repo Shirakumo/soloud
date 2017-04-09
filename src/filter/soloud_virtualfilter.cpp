@@ -32,44 +32,36 @@
 
 namespace SoLoud
 {
-	VirtualFilterInstance::VirtualFilterInstance(VirtualFilter *aParent, unsigned int aId, int aNumParams,
-	                                             void (*aConstructor)(), void (*aDestructor)(),
-	                                             void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-	                                             void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
+	VirtualFilter::VirtualFilter(unsigned int classID)
 	{
-		mId = aId;
-		mParent = aParent;
-
-		mDestructor = aDestructor;
-		mFilter = aFilter;
-		mFilterChannel = aFilterChannel;
-
-		if (aConstructor)
-			aConstructor();
-		
-		initParams(aNumParams);
+		this->mClassID = classID;
 	}
 
-	VirtualFilterInstance::~VirtualFilterInstance()
+	void (*VirtualFilter::filterC)(unsigned int, float *, unsigned int, unsigned int, float, time) = 0;
+	void (*VirtualFilter::filterChannelC)(unsigned int, float *, unsigned int, float, time, unsigned int, unsigned int) = 0;
+
+	FilterInstance *VirtualFilter::createInstance()
 	{
-		if (mDestructor)
-			mDestructor();
+		return new VirtualFilterInstance(this);
 	}
 
-	unsigned int VirtualFilterInstance::getId()
+	unsigned int VirtualFilter::getClassID()
 	{
-		return mId;
+		return this->mClassID;
+	}
+	
+	VirtualFilterInstance::VirtualFilterInstance(VirtualFilter *aParent)
+	{
+		this->mParent = aParent;
 	}
 
 	void VirtualFilterInstance::filter(float *aBuffer, unsigned int aSamples,
 	                                   unsigned int aChannels, float aSamplerate,
 	                                   time aTime)
 	{
-		if (mFilter)
-		{
-			updateParams(aTime);
-			mFilter(aBuffer, aSamples, aChannels, aSamplerate, aTime);
-		}
+		if(VirtualFilter::filterC)
+			VirtualFilter::filterC(this->mParent->getClassID(), aBuffer, aSamples, aChannels,
+														 aSamplerate, aTime);
 	}
 
 	void VirtualFilterInstance::filterChannel(float *aBuffer, unsigned int aSamples,
@@ -77,35 +69,8 @@ namespace SoLoud
 	                                          unsigned int aChannel,
 	                                          unsigned int aChannels)
 	{
-		if (mFilterChannel)
-		{
-			updateParams(aTime);
-			mFilterChannel(aBuffer, aSamples, aSamplerate, aTime, aChannel, aChannels);
-		}
-	}
-
-	
-	VirtualFilter::VirtualFilter(unsigned int aId, int aNumParams,
-	                             void (*aConstructor)(), void (*aDestructor)(),
-	                             void (*aFilter)(float *, unsigned int, unsigned int, float, time),
-	                             void (*aFilterChannel)(float *, unsigned int, float, time, unsigned int, unsigned int))
-	{
-		mId = aId;
-		mNumParams = aNumParams;
-
-		mConstructor = aConstructor;
-		mDestructor = aDestructor;
-		mFilter = aFilter;
-		mFilterChannel = aFilterChannel;
-	}
-
-	FilterInstance *VirtualFilter::createInstance()
-	{
-		return new VirtualFilterInstance(this, mId, mNumParams, mConstructor, mDestructor, mFilter, mFilterChannel);
-	}
-
-	unsigned int VirtualFilter::getId()
-	{
-		return mId;
+		if(VirtualFilter::filterChannelC)
+			VirtualFilter::filterChannelC(this->mParent->getClassID(), aBuffer, aSamples,
+																		aSamplerate, aTime, aChannel, aChannels);
 	}
 }

@@ -33,89 +33,64 @@
 #include "soloud.h"
 
 namespace SoLoud
-{	
-	// Maximum number of virtual audio sources
-	const unsigned int MAXIMUM_VIRTUAL_AUDIOSOURCES = 128;
-	const unsigned int MAXIMUM_VIRTUAL_AUDIOCOLLIDERS = 128;
-	const unsigned int MAXIMUM_VIRTUAL_AUDIOATTENUATORS = 128;
-	
-
-	class VirtualAudioCollider
+{
+	class VirtualAudioSource : public AudioSource
 	{
-		float (*mCollide)(Soloud *, AudioSourceInstance3dData *, int);
+	private:
+		unsigned int mClassID;
+
 	public:
-		VirtualAudioCollider(float (*aCollide)(Soloud *, AudioSourceInstance3dData *, int));
-		virtual float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData);
+		static void (*getAudioC)(unsigned int, float *, int);
+		static int (*hasEndedC)(unsigned int);
+		static void (*seekC)(unsigned int, float, float *, int);
+		static int (*rewindC)(unsigned int);
+		static float (*getInfoC)(unsigned int, unsigned int);
+		
+		virtual AudioSourceInstance *createInstance();
+		unsigned int getClassID();
+		
+		VirtualAudioSource(unsigned int aID);
 	};
-
-	class VirtualAudioAttenuator
-	{
-		float (*mAttenuate)(float, float, float, float);
-	public:
-		VirtualAudioAttenuator(float (*aAttenuate)(float, float, float, float));
-		virtual float attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor);
-	};
-
-
-	class VirtualAudioSource;
 	
 	class VirtualAudioSourceInstance : public AudioSourceInstance
 	{
+	private:
 		VirtualAudioSource *mParent;
-		unsigned int mId;
-
-		void (*mDestructor)();
-		void (*mGetAudio)(float *, int);
-		int (*mHasEnded)();
-		void (*mSeek)(float, float *, int);
-		int (*mRewind)();
-		float (*mGetInfo)(unsigned int);
 
 	public:
-		virtual ~VirtualAudioSourceInstance();
-		
 		virtual void getAudio(float *aBuffer, unsigned int aSamples);
 		virtual bool hasEnded();
 		virtual void seek(time aSeconds, float *aScratch, unsigned int aScratchSize);
 		virtual result rewind();
 		virtual float getInfo(unsigned int aInfoKey);
-		VirtualAudioSourceInstance(VirtualAudioSource *aParent, unsigned int aId,
-		                           void (*aConstructor)(), void (*aDestructor)(),
-		                           void (*aGetAudio)(float *, int), int (*aHasEnded)(),
-		                           void (*aSeek)(float, float *, int), int (*aRewind)(),
-		                           float (*aGetInfo)(unsigned int));
-		unsigned int getId();
+		
+		VirtualAudioSourceInstance(VirtualAudioSource *aParent);
 	};
 
-	class VirtualAudioSource : public AudioSource
+	class VirtualAudioCollider : public AudioCollider
 	{
-		unsigned int mId;
-		void (*mSetFilter)(unsigned int, Filter*);
-
-		void (*mConstructor)();
-		void (*mDestructor)();
-		void (*mGetAudio)(float *, int);
-		int (*mHasEnded)();
-		void (*mSeek)(float, float *, int);
-		int (*mRewind)();
-		float (*mGetInfo)(unsigned int);
+	private:
+		unsigned int mClassID;
 
 	public:
-		enum CAPI_ACTION
-		{
-			GET,
-			SET,
-			REMOVE
-		};
+		static float (*collideC)(unsigned int, void *, void *, int);
 
-		virtual void setFilter(unsigned int aFilterId, Filter *aFilter);
-		virtual AudioSourceInstance *createInstance();
-		VirtualAudioSource(unsigned int aId, void (*aSetFilter)(unsigned int, Filter*),
-		                   void (*aConstructor)(), void (*aDestructor)(),
-		                   void (*aGetAudio)(float *, int), int (*aHasEnded)(),
-		                   void (*aSeek)(float, float *, int), int (*aRewind)(),
-		                   float (*aGetInfo)(unsigned int));
-		unsigned int getId();
+		virtual float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData);
+
+		VirtualAudioCollider(unsigned int aID);
+	};
+
+	class VirtualAudioAttenuator : public AudioAttenuator
+	{
+	private:
+		unsigned int mClassID;
+
+	public:
+		static float (*attenuateC)(unsigned int, float, float, float, float);
+
+		virtual float attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor);
+
+		VirtualAudioAttenuator(unsigned int aID);
 	};
 }
 
