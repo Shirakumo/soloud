@@ -35,18 +35,15 @@
 namespace SoLoud
 {	
 	class VirtualFilter : public Filter
-	{
-	private:
-		unsigned int mClassID;
-		
+	{		
 	public:
-		static void (*filterC)(unsigned int, float *, unsigned int, unsigned int, float, time);
-		static void (*filterChannelC)(unsigned int, float *, unsigned int, float, time, unsigned int, unsigned int);
+		static void (*filterC)(void *, float *, unsigned int, unsigned int, float, time);
+		static void (*filterChannelC)(void *, float *, unsigned int, float, time, unsigned int, unsigned int);
 		
 		virtual FilterInstance *createInstance();
 		unsigned int getClassID();
 		
-		VirtualFilter(unsigned int aId);
+		VirtualFilter();
 	};
 	
 	class VirtualFilterInstance : public FilterInstance

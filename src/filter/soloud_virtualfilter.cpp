@@ -32,22 +32,15 @@
 
 namespace SoLoud
 {
-	VirtualFilter::VirtualFilter(unsigned int classID)
-	{
-		this->mClassID = classID;
-	}
+	VirtualFilter::VirtualFilter()
+	{}
 
-	void (*VirtualFilter::filterC)(unsigned int, float *, unsigned int, unsigned int, float, time) = 0;
-	void (*VirtualFilter::filterChannelC)(unsigned int, float *, unsigned int, float, time, unsigned int, unsigned int) = 0;
+	void (*VirtualFilter::filterC)(void *, float *, unsigned int, unsigned int, float, time) = 0;
+	void (*VirtualFilter::filterChannelC)(void *, float *, unsigned int, float, time, unsigned int, unsigned int) = 0;
 
 	FilterInstance *VirtualFilter::createInstance()
 	{
 		return new VirtualFilterInstance(this);
-	}
-
-	unsigned int VirtualFilter::getClassID()
-	{
-		return this->mClassID;
 	}
 	
 	VirtualFilterInstance::VirtualFilterInstance(VirtualFilter *aParent)
@@ -60,7 +53,7 @@ namespace SoLoud
 	                                   time aTime)
 	{
 		if(VirtualFilter::filterC)
-			VirtualFilter::filterC(this->mParent->getClassID(), aBuffer, aSamples, aChannels,
+			VirtualFilter::filterC((void *)this->mParent, aBuffer, aSamples, aChannels,
 														 aSamplerate, aTime);
 	}
 
@@ -70,7 +63,7 @@ namespace SoLoud
 	                                          unsigned int aChannels)
 	{
 		if(VirtualFilter::filterChannelC)
-			VirtualFilter::filterChannelC(this->mParent->getClassID(), aBuffer, aSamples,
+			VirtualFilter::filterChannelC((void *)this->mParent, aBuffer, aSamples,
 																		aSamplerate, aTime, aChannel, aChannels);
 	}
 }

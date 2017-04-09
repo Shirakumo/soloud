@@ -36,27 +36,24 @@ namespace SoLoud
 {
 	class VirtualAudioSource : public AudioSource
 	{
-	private:
-		unsigned int mClassID;
-
 	public:
-		static void (*getAudioC)(unsigned int, float *, int);
-		static int (*hasEndedC)(unsigned int);
-		static void (*seekC)(unsigned int, float, float *, int);
-		static int (*rewindC)(unsigned int);
-		static float (*getInfoC)(unsigned int, unsigned int);
+		static void (*getAudioC)(void *, float *, int);
+		static int (*hasEndedC)(void *);
+		static void (*seekC)(void *, float, float *, int);
+		static int (*rewindC)(void *);
+		static float (*getInfoC)(void *, unsigned int);
 		
 		virtual AudioSourceInstance *createInstance();
 		unsigned int getClassID();
 		
-		VirtualAudioSource(unsigned int aID);
+		VirtualAudioSource();
 	};
 	
 	class VirtualAudioSourceInstance : public AudioSourceInstance
 	{
 	private:
 		VirtualAudioSource *mParent;
-
+		
 	public:
 		virtual void getAudio(float *aBuffer, unsigned int aSamples);
 		virtual bool hasEnded();
@@ -69,28 +66,24 @@ namespace SoLoud
 
 	class VirtualAudioCollider : public AudioCollider
 	{
-	private:
-		unsigned int mClassID;
-
 	public:
-		static float (*collideC)(unsigned int, void *, void *, int);
+		static float (*collideC)(void *, void *, void *, int);
 
 		virtual float collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData);
+		unsigned int getClassID();
 
-		VirtualAudioCollider(unsigned int aID);
+		VirtualAudioCollider();
 	};
 
 	class VirtualAudioAttenuator : public AudioAttenuator
 	{
-	private:
-		unsigned int mClassID;
-
 	public:
-		static float (*attenuateC)(unsigned int, float, float, float, float);
+		static float (*attenuateC)(void *, float, float, float, float);
 
 		virtual float attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor);
+		unsigned int getClassID();
 
-		VirtualAudioAttenuator(unsigned int aID);
+		VirtualAudioAttenuator();
 	};
 }
 

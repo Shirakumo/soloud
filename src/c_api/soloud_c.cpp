@@ -1829,9 +1829,9 @@ void TedSid_stop(void * aClassPtr)
 	cl->stop();
 }
 
-void *VirtualFilter_create(unsigned int classID)
+void *VirtualFilter_create()
 {
-	return (void *)new VirtualFilter(classID);
+	return (void *)new VirtualFilter();
 }
 
 void VirtualFilter_destroy(void *filter)
@@ -1839,19 +1839,19 @@ void VirtualFilter_destroy(void *filter)
 	delete (VirtualFilter *)filter;
 }
 
-void VirtualFilter_setFilterCallback(void (*aFilter)(unsigned int, float *, unsigned int, unsigned int, float, time))
+void VirtualFilter_setFilterCallback(void (*aFilter)(void *, float *, unsigned int, unsigned int, float, time))
 {
 	VirtualFilter::filterC = aFilter;
 }
 
-void VirtualFilter_setFilterChannelCallback(void (*aFilterChannel)(unsigned int, float *, unsigned int, float, time, unsigned int, unsigned int))
+void VirtualFilter_setFilterChannelCallback(void (*aFilterChannel)(void *, float *, unsigned int, float, time, unsigned int, unsigned int))
 {
 	VirtualFilter::filterChannelC = aFilterChannel;
 }
 
-void *VirtualAudioSource_create(unsigned int classID)
+void *VirtualAudioSource_create()
 {
-	return (void *)new VirtualAudioSource(classID);
+	return (void *)new VirtualAudioSource();
 }
 
 void VirtualAudioSource_destroy(void *source)
@@ -1859,34 +1859,34 @@ void VirtualAudioSource_destroy(void *source)
 	delete (VirtualAudioSource *)source;
 }
 
-void VirtualAudioSource_setGetAudioCallback(void (*aGetAudio)(unsigned int, float *, int))
+void VirtualAudioSource_setGetAudioCallback(void (*aGetAudio)(void *, float *, int))
 {
 	VirtualAudioSource::getAudioC = aGetAudio;
 }
 
-void VirtualAudioSource_setHasEndedCallback(int (*aHasEnded)(unsigned int))
+void VirtualAudioSource_setHasEndedCallback(int (*aHasEnded)(void *))
 {
 	VirtualAudioSource::hasEndedC = aHasEnded;
 }
 
-void VirtualAudioSource_setSeekCallback(void (*aSeek)(unsigned int, float, float *, int))
+void VirtualAudioSource_setSeekCallback(void (*aSeek)(void *, float, float *, int))
 {
 	VirtualAudioSource::seekC = aSeek;
 }
 
-void VirtualAudioSource_setRewindCallback(int (*aRewind)(unsigned int))
+void VirtualAudioSource_setRewindCallback(int (*aRewind)(void *))
 {
 	VirtualAudioSource::rewindC = aRewind;
 }
 
-void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(unsigned int, unsigned int))
+void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(void *, unsigned int))
 {
 	VirtualAudioSource::getInfoC = aGetInfo;
 }
 
-void *VirtualAudioCollider_create(unsigned int classID)
+void *VirtualAudioCollider_create()
 {
-	return (void *)new VirtualAudioCollider(classID);
+	return (void *)new VirtualAudioCollider();
 }
 
 void VirtualAudioCollider_destroy(void *source)
@@ -1894,14 +1894,14 @@ void VirtualAudioCollider_destroy(void *source)
 	delete (VirtualAudioCollider *)source;
 }
 
-void VirtualAudioCollider_setCollideCallback(float (*collideC)(unsigned int, void *, void *, int))
+void VirtualAudioCollider_setCollideCallback(float (*collideC)(void *, void *, void *, int))
 {
 	VirtualAudioCollider::collideC = collideC;
 }
 
-void *VirtualAudioAttenuator_create(unsigned int classID)
+void *VirtualAudioAttenuator_create()
 {
-	return (void *)new VirtualAudioAttenuator(classID);
+	return (void *)new VirtualAudioAttenuator();
 }
 
 void VirtualAudioAttenuator_destroy(void *source)
@@ -1909,7 +1909,7 @@ void VirtualAudioAttenuator_destroy(void *source)
 	delete (VirtualAudioAttenuator *)source;
 }
 
-void VirtualAudioAttenuator_setCollideCallback(float (*attenuateC)(unsigned int, float, float, float, float))
+void VirtualAudioAttenuator_setCollideCallback(float (*attenuateC)(void *, float, float, float, float))
 {
 	VirtualAudioAttenuator::attenuateC = attenuateC;
 }

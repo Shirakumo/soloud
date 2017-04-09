@@ -32,25 +32,18 @@
 
 namespace SoLoud
 {
-	VirtualAudioSource::VirtualAudioSource(unsigned int classID)
-	{
-		this->mClassID = classID;
-	}
+	VirtualAudioSource::VirtualAudioSource()
+	{}
 
-	void (*VirtualAudioSource::getAudioC)(unsigned int, float *, int) = 0;
-	int (*VirtualAudioSource::hasEndedC)(unsigned int) = 0;
-	void (*VirtualAudioSource::seekC)(unsigned int, float, float *, int) = 0;
-	int (*VirtualAudioSource::rewindC)(unsigned int) = 0;
-	float (*VirtualAudioSource::getInfoC)(unsigned int, unsigned int) = 0;
+	void (*VirtualAudioSource::getAudioC)(void *, float *, int) = 0;
+	int (*VirtualAudioSource::hasEndedC)(void *) = 0;
+	void (*VirtualAudioSource::seekC)(void *, float, float *, int) = 0;
+	int (*VirtualAudioSource::rewindC)(void *) = 0;
+	float (*VirtualAudioSource::getInfoC)(void *, unsigned int) = 0;
 
 	AudioSourceInstance *VirtualAudioSource::createInstance()
 	{
 		return new VirtualAudioSourceInstance(this);
-	}
-
-	unsigned int VirtualAudioSource::getClassID()
-	{
-		return this->mClassID;
 	}
 	
 	VirtualAudioSourceInstance::VirtualAudioSourceInstance(VirtualAudioSource *aParent)
@@ -61,58 +54,56 @@ namespace SoLoud
 	void VirtualAudioSourceInstance::getAudio(float *aBuffer, unsigned int aSamples)
 	{
 		if(VirtualAudioSource::getAudioC)
-			VirtualAudioSource::getAudioC(this->mParent->getClassID(), aBuffer, aSamples);
+			VirtualAudioSource::getAudioC((void *)this->mParent, aBuffer, aSamples);
 	}
 
 	bool VirtualAudioSourceInstance::hasEnded()
 	{
 		if(VirtualAudioSource::hasEndedC)
-			return VirtualAudioSource::hasEndedC(this->mParent->getClassID());
+			return VirtualAudioSource::hasEndedC((void *)this->mParent);
 		return true;
 	}
 
 	void VirtualAudioSourceInstance::seek(time aSeconds, float *aScratch, unsigned int aScratchSize)
 	{
 		if(VirtualAudioSource::seekC)
-			VirtualAudioSource::seekC(this->mParent->getClassID(), aSeconds,
+			VirtualAudioSource::seekC((void *)this->mParent, aSeconds,
 																aScratch, aScratchSize);
 	}
 
 	result VirtualAudioSourceInstance::rewind()
 	{
 		if(VirtualAudioSource::rewindC)
-			return VirtualAudioSource::rewindC(this->mParent->getClassID());
+			return VirtualAudioSource::rewindC((void *)this->mParent);
 		return 0;
 	}
 
 	float VirtualAudioSourceInstance::getInfo(unsigned int aInfoKey)
 	{
 		if(VirtualAudioSource::getInfoC)
-			return VirtualAudioSource::getInfoC(this->mParent->getClassID(), aInfoKey);
+			return VirtualAudioSource::getInfoC((void *)this->mParent, aInfoKey);
 		return 0.0;
 	}
 
-	VirtualAudioCollider::VirtualAudioCollider(unsigned int classID){
-		this->mClassID = classID;
-	}
+	VirtualAudioCollider::VirtualAudioCollider()
+	{}
 
-	float (*VirtualAudioCollider::collideC)(unsigned int, void *, void *, int) = 0;
+	float (*VirtualAudioCollider::collideC)(void *, void *, void *, int) = 0;
 
 	float VirtualAudioCollider::collide(Soloud *aSoloud, AudioSourceInstance3dData *aAudioInstance3dData,	int aUserData){
 		if(VirtualAudioCollider::collideC)
-			return VirtualAudioCollider::collideC(this->mClassID, (void *)aSoloud, (void *)aAudioInstance3dData, aUserData);
+			return VirtualAudioCollider::collideC((void *)this, (void *)aSoloud, (void *)aAudioInstance3dData, aUserData);
 		return 0.0;
 	}
 
-	VirtualAudioAttenuator::VirtualAudioAttenuator(unsigned int classID){
-		this->mClassID = classID;
-	}
+	VirtualAudioAttenuator::VirtualAudioAttenuator()
+	{}
 
-	float (*VirtualAudioAttenuator::attenuateC)(unsigned int, float, float, float, float) = 0;
+	float (*VirtualAudioAttenuator::attenuateC)(void *, float, float, float, float) = 0;
 
 	float VirtualAudioAttenuator::attenuate(float aDistance, float aMinDistance, float aMaxDistance, float aRolloffFactor){
 		if(VirtualAudioAttenuator::attenuateC)
-			return VirtualAudioAttenuator::attenuateC(this->mClassID, aDistance, aMinDistance, aMaxDistance, aRolloffFactor);
+			return VirtualAudioAttenuator::attenuateC((void *)this, aDistance, aMinDistance, aMaxDistance, aRolloffFactor);
 		return 0.0;
 	}
 }

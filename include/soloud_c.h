@@ -494,34 +494,34 @@ void TedSid_stop(TedSid * aTedSid);
  * VirtualFilter
  */
 VirtualFilter *VirtualFilter_create(unsigned int classID);
-void VirtualFilter_destroy(VirtualAudioSource *filter);
-void VirtualFilter_setFilterCallback(void (*aFilter)(unsigned int, float *, unsigned int, unsigned int, float, time));
-void VirtualFilter_setFilterChannelCallback(void (*aFilterChannel)(unsigned int, float *,  unsigned int,  float, time));
+void VirtualFilter_destroy(VirtualFilter *filter);
+void VirtualFilter_setFilterCallback(void (*aFilter)(VirtualFilter *, float *, unsigned int, unsigned int, float, time));
+	void VirtualFilter_setFilterChannelCallback(void (*aFilterChannel)(VirtualFilter *, float *,  unsigned int,  float, time));
 
 /* 
  * VirtualAudioSource
  */
 VirtualAudioSource *VirtualAudioSource_create(unsigned int classID);
 void VirtualAudioSource_destroy(VirtualAudioSource *source);
-void VirtualAudioSource_setGetAudioCallback(void (*aGetAudio)(unsigned int, float *, int));
-void VirtualAudioSource_setHasEndedCallback(int (*aHasEnded)(unsigned int));
-void VirtualAudioSource_setSeekCallback(void (*aSeek)(unsigned int, float, float *, int));
-void VirtualAudioSource_setRewindCallback(int (*aRewind)(unsigned int));
-void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(unsigned int, unsigned int));
+void VirtualAudioSource_setGetAudioCallback(void (*aGetAudio)(VirtualAudioSource *, float *, int));
+void VirtualAudioSource_setHasEndedCallback(int (*aHasEnded)(VirtualAudioSource *));
+void VirtualAudioSource_setSeekCallback(void (*aSeek)(VirtualAudioSource *, float, float *, int));
+void VirtualAudioSource_setRewindCallback(int (*aRewind)(VirtualAudioSource *));
+void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(VirtualAudioSource *, unsigned int));
 
 /*
  * VirtualAudioCollider
  */
 VirtualAudioCollider *VirtualAudioCollider_create(unsigned int classID);
 void VirtualAudioCollider_destroy(VirtualAudioCollider *source);
-void VirtualAudioCollider_setCollideCallback(float (*collideC)(unsigned int, void *, void *, int));
+void VirtualAudioCollider_setCollideCallback(float (*collideC)(VirtualAudioCollider *, void *, void *, int));
 
 /*
  * VirtualAudioAttenuator
  */
 VirtualAudioAttenuator *VirtualAudioAttenuator_create(unsigned int classID);
 void VirtualAudioAttenuator_destroy(VirtualAudioAttenuator *source);
-void VirtualAudioAttenuator_setAttenuateCallback(float (*collideC)(unsigned int, void *, void *, int));
+void VirtualAudioAttenuator_setAttenuateCallback(float (*collideC)(VirtualAudioCollider *, void *, void *, int));
 	
 #ifdef  __cplusplus
 } // extern "C"
