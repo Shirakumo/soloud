@@ -1979,7 +1979,7 @@ void VirtualAudioAttenuator_destroy(void *source)
 	delete (VirtualAudioAttenuator *)source;
 }
 
-void VirtualAudioAttenuator_setCollideCallback(float (*attenuateC)(void *, float, float, float, float))
+void VirtualAudioAttenuator_setAttenuateCallback(float (*attenuateC)(void *, float, float, float, float))
 {
 	VirtualAudioAttenuator::attenuateC = attenuateC;
 }
