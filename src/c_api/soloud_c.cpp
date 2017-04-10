@@ -1884,6 +1884,76 @@ void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(void *, unsigned in
 	VirtualAudioSource::getInfoC = aGetInfo;
 }
 
+void VirtualAudioSource_setVolume(void * aClassPtr, float aVolume)
+{
+	((VirtualAudioSource *)aClassPtr)->setVolume(aVolume);
+}
+
+void VirtualAudioSource_setLooping(void * aClassPtr, int aLoop)
+{
+	((VirtualAudioSource *)aClassPtr)->setLooping(!!aLoop);
+}
+
+void VirtualAudioSource_set3dMinMaxDistance(void * aClassPtr, float aMinDistance, float aMaxDistance)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dMinMaxDistance(aMinDistance, aMaxDistance);
+}
+
+void VirtualAudioSource_set3dAttenuation(void * aClassPtr, unsigned int aAttenuationModel, float aAttenuationRolloffFactor)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dAttenuation(aAttenuationModel, aAttenuationRolloffFactor);
+}
+
+void VirtualAudioSource_set3dDopplerFactor(void * aClassPtr, float aDopplerFactor)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dDopplerFactor(aDopplerFactor);
+}
+
+void VirtualAudioSource_set3dProcessing(void * aClassPtr, int aDo3dProcessing)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dProcessing(!!aDo3dProcessing);
+}
+
+void VirtualAudioSource_set3dListenerRelative(void * aClassPtr, int aListenerRelative)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dListenerRelative(!!aListenerRelative);
+}
+
+void VirtualAudioSource_set3dDistanceDelay(void * aClassPtr, int aDistanceDelay)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dDistanceDelay(!!aDistanceDelay);
+}
+
+void VirtualAudioSource_set3dCollider(void * aClassPtr, AudioCollider * aCollider)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dCollider(aCollider);
+}
+
+void VirtualAudioSource_set3dColliderEx(void * aClassPtr, AudioCollider * aCollider, int aUserData)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dCollider(aCollider, aUserData);
+}
+
+void VirtualAudioSource_set3dAttenuator(void * aClassPtr, AudioAttenuator * aAttenuator)
+{
+	((VirtualAudioSource *)aClassPtr)->set3dAttenuator(aAttenuator);
+}
+
+void VirtualAudioSource_setInaudibleBehavior(void * aClassPtr, int aMustTick, int aKill)
+{
+	((VirtualAudioSource *)aClassPtr)->setInaudibleBehavior(!!aMustTick, !!aKill);
+}
+
+void VirtualAudioSource_setFilter(void * aClassPtr, unsigned int aFilterId, Filter * aFilter)
+{
+	((VirtualAudioSource *)aClassPtr)->setFilter(aFilterId, aFilter);
+}
+
+void VirtualAudioSource_stop(void * aClassPtr)
+{
+	((VirtualAudioSource *)aClassPtr)->stop();
+}
+
 void *VirtualAudioCollider_create()
 {
 	return (void *)new VirtualAudioCollider();
