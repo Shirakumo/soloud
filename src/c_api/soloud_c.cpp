@@ -1954,12 +1954,12 @@ void VirtualAudioSource_stop(void * aClassPtr)
 	((VirtualAudioSource *)aClassPtr)->stop();
 }
 	
-void VirtualAudioSource_setBaseSampleRate(void *source, float samplerate)
+void VirtualAudioSource_setBaseSamplerate(void *source, float samplerate)
 {
 	((VirtualAudioSource *)source)->mBaseSamplerate = samplerate;
 }
 
-float VirtualAudioSource_getBaseSampleRate(void *source)
+float VirtualAudioSource_getBaseSamplerate(void *source)
 {
 	return ((VirtualAudioSource *)source)->mBaseSamplerate;
 }
