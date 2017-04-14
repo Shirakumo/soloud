@@ -1953,6 +1953,16 @@ void VirtualAudioSource_stop(void * aClassPtr)
 {
 	((VirtualAudioSource *)aClassPtr)->stop();
 }
+	
+void VirtualAudioSource_setBaseSampleRate(void *source, float samplerate)
+{
+	((VirtualAudioSource *)source)->mBaseSamplerate = samplerate;
+}
+
+float VirtualAudioSource_getBaseSampleRate(void *source)
+{
+	return ((VirtualAudioSource *)source)->mBaseSamplerate;
+}
 
 void *VirtualAudioCollider_create()
 {
@@ -1983,5 +1993,85 @@ void VirtualAudioAttenuator_setAttenuateCallback(float (*attenuateC)(void *, flo
 {
 	VirtualAudioAttenuator::attenuateC = attenuateC;
 }
+
+void AudioSourceInstance3dData_3dPosition(void *instance, float *x, float *y, float *z)
+{
+	*x = ((AudioSourceInstance3dData *)instance)->m3dPosition[0];
+	*y = ((AudioSourceInstance3dData *)instance)->m3dPosition[1];
+	*z = ((AudioSourceInstance3dData *)instance)->m3dPosition[2];
+}
+
+void AudioSourceInstance3dData_3dVelocity(void *instance, float *x, float *y, float *z)
+{
+	*x = ((AudioSourceInstance3dData *)instance)->m3dVelocity[0];
+	*y = ((AudioSourceInstance3dData *)instance)->m3dVelocity[1];
+	*z = ((AudioSourceInstance3dData *)instance)->m3dVelocity[2];
+}
+
+float AudioSourceInstance3dData_3dMinDistance(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dMinDistance;
+}
+
+float AudioSourceInstance3dData_3dMaxDistance(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dMaxDistance;
+}
+
+float AudioSourceInstance3dData_3dAttenuationRolloff(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dAttenuationRolloff;
+}
+
+unsigned int AudioSourceInstance3dData_3dAttenuationModel(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dAttenuationModel;
+}
+
+float AudioSourceInstance3dData_3dDopplerFactor(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dDopplerFactor;
+}
+
+void *AudioSourceInstance3dData_audioCollider(void *instance)
+{
+	return (void *)((AudioSourceInstance3dData *)instance)->mCollider;
+}
+
+void *AudioSourceInstance3dData_audioAttenuator(void *instance)
+{
+	return (void *)((AudioSourceInstance3dData *)instance)->mAttenuator;
+}
+
+int AudioSourceInstance3dData_colliderData(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->mColliderData;
+}
+
+float AudioSourceInstance3dData_dopplerValue(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->mDopplerValue;
+}
+
+float AudioSourceInstance3dData_3dVolume(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->m3dVolume;
+}
+
+float AudioSourceInstance3dData_channelVolume(void *instance, unsigned int channel)
+{
+	return ((AudioSourceInstance3dData *)instance)->mChannelVolume[channel];
+}
+
+unsigned int AudioSourceInstance3dData_flags(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->mFlags;
+}
+
+unsigned int AudioSourceInstance3dData_handle(void *instance)
+{
+	return ((AudioSourceInstance3dData *)instance)->mHandle;
+}
+
 
 } // extern "C"
