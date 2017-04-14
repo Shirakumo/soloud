@@ -528,21 +528,21 @@ void VirtualAudioAttenuator_setAttenuateCallback(float (*collideC)(VirtualAudioC
 /*
  * AudioSourceInstance3dData
  */
-void AudioSourceInstance3dData_3dPosition(AudioSourceInstance3dData *instance, float *x, float *y, float *z);
-void AudioSourceInstance3dData_3dVelocity(AudioSourceInstance3dData *instance, float *x, float *y, float *z);
-float AudioSourceInstance3dData_3dMinDistance(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_3dMaxDistance(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_3dAttenuationRolloff(AudioSourceInstance3dData *instance);
-unsigned int AudioSourceInstance3dData_3dAttenuationModel(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_3dDopplerFactor(AudioSourceInstance3dData *instance);
-AudioCollider *AudioSourceInstance3dData_audioCollider(AudioSourceInstance3dData *instance);
-AudioAttenuator *AudioSourceInstance3dData_audioAttenuator(AudioSourceInstance3dData *instance);
-int AudioSourceInstance3dData_colliderData(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_dopplerValue(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_3dVolume(AudioSourceInstance3dData *instance);
-float AudioSourceInstance3dData_channelVolume(AudioSourceInstance3dData *instance, unsigned int channel);
-unsigned int AudioSourceInstance3dData_flags(AudioSourceInstance3dData *instance);
-unsigned int AudioSourceInstance3dData_handle(AudioSourceInstance3dData *instance);
+void AudioSourceInstance3dData_get3dPosition(AudioSourceInstance3dData *instance, float *x, float *y, float *z);
+void AudioSourceInstance3dData_get3dVelocity(AudioSourceInstance3dData *instance, float *x, float *y, float *z);
+float AudioSourceInstance3dData_get3dMinDistance(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_get3dMaxDistance(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_get3dAttenuationRolloff(AudioSourceInstance3dData *instance);
+unsigned int AudioSourceInstance3dData_get3dAttenuationModel(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_get3dDopplerFactor(AudioSourceInstance3dData *instance);
+AudioCollider *AudioSourceInstance3dData_getAudioCollider(AudioSourceInstance3dData *instance);
+AudioAttenuator *AudioSourceInstance3dData_getAudioAttenuator(AudioSourceInstance3dData *instance);
+int AudioSourceInstance3dData_getColliderData(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_getDopplerValue(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_get3dVolume(AudioSourceInstance3dData *instance);
+float AudioSourceInstance3dData_getChannelVolume(AudioSourceInstance3dData *instance, unsigned int channel);
+unsigned int AudioSourceInstance3dData_getFlags(AudioSourceInstance3dData *instance);
+unsigned int AudioSourceInstance3dData_getHandle(AudioSourceInstance3dData *instance);
 	
 #ifdef  __cplusplus
 } // extern "C"
