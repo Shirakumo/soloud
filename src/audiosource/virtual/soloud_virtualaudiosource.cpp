@@ -33,7 +33,9 @@
 namespace SoLoud
 {
 	VirtualAudioSource::VirtualAudioSource()
-	{}
+	{
+		this->setSingleInstance(true);
+	}
 
 	void (*VirtualAudioSource::getAudioC)(void *, float *, int) = 0;
 	int (*VirtualAudioSource::hasEndedC)(void *) = 0;
