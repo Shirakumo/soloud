@@ -1974,6 +1974,16 @@ int VirtualAudioSource_getChannels(void *source)
 	return ((VirtualAudioSource *)source)->mChannels;
 }
 
+void VirtualAudioSource_setFlags(void *source, unsigned int flags)
+{
+	((VirtualAudioSource *)source)->mFlags = flags;
+}
+
+unsigned int VirtualAudioSource_getFlags(void *source)
+{
+	return ((VirtualAudioSource *)source)->mFlags;
+}
+
 void *VirtualAudioCollider_create()
 {
 	return (void *)new VirtualAudioCollider();

@@ -512,6 +512,8 @@ void VirtualAudioSource_setBaseSamplerate(VirtualAudioSource *source, float samp
 float VirtualAudioSource_getBaseSamplerate(VirtualAudioSource *source);
 void VirtualAudioSource_setChannels(VirtualAudioSource *source, int channels);
 int VirtualAudioSource_getChannels(VirtualAudioSource *source);
+unsigned int VirtualAudioSource_getFlags(VirtualAudioSource *source);
+void VirtualAudioSource_setFlags(VirtualAudioSource *source, unsigned int flags);
 
 /*
  * VirtualAudioCollider

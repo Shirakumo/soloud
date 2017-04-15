@@ -325,6 +325,12 @@ EXPORTS
 	VirtualAudioSource_setInaudibleBehavior
 	VirtualAudioSource_setFilter
 	VirtualAudioSource_stop
+	VirtualAudioSource_setBaseSamplerate
+	VirtualAudioSource_getBaseSamplerate
+	VirtualAudioSource_setChannels
+	VirtualAudioSource_getChannels
+	VirtualAudioSource_setFlags
+	VirtualAudioSource_getFlags
 	VirtualAudioCollider_create
 	VirtualAudioCollider_destroy
 	VirtualAudioCollider_setCollideCallback
