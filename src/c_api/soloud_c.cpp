@@ -1964,6 +1964,16 @@ float VirtualAudioSource_getBaseSamplerate(void *source)
 	return ((VirtualAudioSource *)source)->mBaseSamplerate;
 }
 
+void VirtualAudioSource_setChannels(void *source, int channels)
+{
+	((VirtualAudioSource *)source)->mChannels = channels;
+}
+
+int VirtualAudioSource_getChannels(void *source)
+{
+	return ((VirtualAudioSource *)source)->mChannels;
+}
+
 void *VirtualAudioCollider_create()
 {
 	return (void *)new VirtualAudioCollider();

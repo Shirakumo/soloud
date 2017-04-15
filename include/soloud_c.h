@@ -510,6 +510,8 @@ void VirtualAudioSource_setRewindCallback(int (*aRewind)(VirtualAudioSource *));
 void VirtualAudioSource_setGetInfoCallback(float (*aGetInfo)(VirtualAudioSource *, unsigned int));
 void VirtualAudioSource_setBaseSamplerate(VirtualAudioSource *source, float samplerate);
 float VirtualAudioSource_getBaseSamplerate(VirtualAudioSource *source);
+void VirtualAudioSource_setChannels(VirtualAudioSource *source, int channels);
+int VirtualAudioSource_getChannels(VirtualAudioSource *source);
 
 /*
  * VirtualAudioCollider
