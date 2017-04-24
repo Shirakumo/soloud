@@ -14,11 +14,11 @@ local WITH_PORTMIDI = 0
 local WITH_TOOLS = 0
 
 if (os.is("Windows")) then
-	WITH_WINMM = 1
+	 WITH_WINMM = 1
 elseif (os.is("macosx")) then
-	WITH_COREAUDIO = 1
+	 WITH_COREAUDIO = 1
 else
-	WITH_ALSA = 1
+	 WITH_ALSA = 1
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
@@ -49,245 +49,245 @@ if _ACTION then buildroot = _ACTION end
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 newoption {
-    trigger       = "with-common-backends",
-    description   = "Includes common backends in build"
+	 trigger       = "with-common-backends",
+	 description   = "Includes common backends in build"
 }
 
 newoption {
-	trigger		  = "with-portmidi",
-	description = "Use PortMidi to drive midi keyboard in the piano demo"
+	 trigger		  = "with-portmidi",
+	 description = "Use PortMidi to drive midi keyboard in the piano demo"
 }
 
 newoption {
-	trigger		  = "with-openal",
-	description = "Include OpenAL backend in build"
+	 trigger		  = "with-openal",
+	 description = "Include OpenAL backend in build"
 }
 
 newoption {
-	trigger		  = "with-sdl",
-	description = "Include SDL backend in build"
+	 trigger		  = "with-sdl",
+	 description = "Include SDL backend in build"
 }
 
 newoption {
-	trigger		  = "with-sdl2",
-	description = "Include SDL2 backend in build"
+	 trigger		  = "with-sdl2",
+	 description = "Include SDL2 backend in build"
 }
 
 newoption {
-	trigger		  = "with-portaudio",
-	description = "Include PortAudio backend in build"
+	 trigger		  = "with-portaudio",
+	 description = "Include PortAudio backend in build"
 }
 
 newoption {
-	trigger		  = "with-wasapi",
-	description = "Include WASAPI backend in build"
+	 trigger		  = "with-wasapi",
+	 description = "Include WASAPI backend in build"
 }
 
 newoption {
-	trigger		  = "with-xaudio2",
-	description = "Include XAudio2 backend in build"
+	 trigger		  = "with-xaudio2",
+	 description = "Include XAudio2 backend in build"
 }
 
 newoption {
-	trigger		  = "with-native-only",
-	description = "Only native backends (winmm/oss) in build (default)"
+	 trigger		  = "with-native-only",
+	 description = "Only native backends (winmm/oss) in build (default)"
 }
 
 newoption {
-	trigger		  = "with-sdl-only",
-	description = "Only include sdl in build"
+	 trigger		  = "with-sdl-only",
+	 description = "Only include sdl in build"
 }
 
 newoption {
-	trigger		  = "with-sdlstatic-only",
-	description = "Only include sdl that doesn't use dyndll in build"
+	 trigger		  = "with-sdlstatic-only",
+	 description = "Only include sdl that doesn't use dyndll in build"
 }
 
 newoption {
-	trigger		  = "with-sdl2-only",
-	description = "Only include sdl2 in build"
+	 trigger		  = "with-sdl2-only",
+	 description = "Only include sdl2 in build"
 }
 
 newoption {
-	trigger		  = "with-sdl2static-only",
-	description = "Only include sdl2 that doesn't use dyndll in build"
+	 trigger		  = "with-sdl2static-only",
+	 description = "Only include sdl2 that doesn't use dyndll in build"
 }
 
 newoption {
-	trigger		  = "with-coreaudio",
-	description = "Include OS X CoreAudio backend in build"
+	 trigger		  = "with-coreaudio",
+	 description = "Include OS X CoreAudio backend in build"
 }
 
 newoption {
-        trigger           = "with-oss",
-        description = "Include Open Sound System backend in build"
+	 trigger           = "with-oss",
+	 description = "Include Open Sound System backend in build"
 }
 
 newoption {
-	trigger		  = "with-tools",
-	description = "Include (optional) tools in build"
+	 trigger		  = "with-tools",
+	 description = "Include (optional) tools in build"
 }
 
 newoption {
-	trigger		  = "soloud-devel",
-	description = "Shorthand for options used while developing SoLoud"
+	 trigger		  = "soloud-devel",
+	 description = "Shorthand for options used while developing SoLoud"
 }
 
 if _OPTIONS["soloud-devel"] then
-    WITH_SDL = 1
-    WITH_SDL_STATIC = 0
-    WITH_SDL2_STATIC = 0
-    WITH_PORTAUDIO = 1
-    WITH_OPENAL = 1
-    WITH_XAUDIO2 = 0
-    WITH_WINMM = 0
-    WITH_WASAPI = 0
-    WITH_OSS = 1
-    if (os.is("Windows")) then
+	 WITH_SDL = 1
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 0
+	 WITH_PORTAUDIO = 1
+	 WITH_OPENAL = 1
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 1
+	 if (os.is("Windows")) then
     	WITH_XAUDIO2 = 0
     	WITH_WINMM = 1
     	WITH_WASAPI = 1
     	WITH_OSS = 0
-    end
-    WITH_TOOLS = 1
-    WITH_PORTMIDI = 1
+	 end
+	 WITH_TOOLS = 1
+	 WITH_PORTMIDI = 1
 end
 
 if _OPTIONS["with-common-backends"] then
-    WITH_SDL = 1
-    WITH_SDL_STATIC = 0
-    WITH_SDL2_STATIC = 0
-    WITH_PORTAUDIO = 1
-    WITH_OPENAL = 1
-    WITH_XAUDIO2 = 0
-    WITH_WINMM = 0
-    WITH_WASAPI = 0
-    WITH_OSS = 1
+	 WITH_SDL = 1
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 0
+	 WITH_PORTAUDIO = 1
+	 WITH_OPENAL = 1
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 1
 
-    if (os.is("Windows")) then
+	 if (os.is("Windows")) then
     	WITH_XAUDIO2 = 0
     	WITH_WINMM = 1
     	WITH_WASAPI = 1
     	WITH_OSS = 0
-    end
+	 end
 end
 
 if _OPTIONS["with-xaudio2"] then
-	WITH_XAUDIO2 = 1
+	 WITH_XAUDIO2 = 1
 end
 
 if _OPTIONS["with-openal"] then
-	WITH_OPENAL = 1
+	 WITH_OPENAL = 1
 end
 
 if _OPTIONS["with-portaudio"] then
-	WITH_PORTAUDIO = 1
+	 WITH_PORTAUDIO = 1
 end
 
 if _OPTIONS["with-coreaudio"] then
-	WITH_COREAUDIO = 1
+	 WITH_COREAUDIO = 1
 end
 
 if _OPTIONS["with-sdl"] then
-	WITH_SDL = 1
+	 WITH_SDL = 1
 end
 
 if _OPTIONS["with-sdl2"] then
-	WITH_SDL = 1
+	 WITH_SDL = 1
 end
 
 if _OPTIONS["with-wasapi"] then
-	WITH_WASAPI = 1
+	 WITH_WASAPI = 1
 end
 
 if _OPTIONS["with-sdl-only"] then
-	WITH_SDL = 1
-	WITH_SDL_STATIC = 0
-	WITH_SDL2_STATIC = 0
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
+	 WITH_SDL = 1
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 0
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
 end
 
 if _OPTIONS["with-sdl2-only"] then
-	WITH_SDL = 1
-	WITH_SDL_STATIC = 0
-	WITH_SDL2_STATIC = 0
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
+	 WITH_SDL = 1
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 0
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
 end
 
 if _OPTIONS["with-sdlstatic-only"] then
-	WITH_SDL = 0
-	WITH_SDL_STATIC = 1
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
+	 WITH_SDL = 0
+	 WITH_SDL_STATIC = 1
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
 end
 
 if _OPTIONS["with-sdl2static-only"] then
-	WITH_SDL = 0
-	WITH_SDL_STATIC = 0
-	WITH_SDL2_STATIC = 1
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
+	 WITH_SDL = 0
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 1
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
 end
 
 if _OPTIONS["with-sdl2static-only"] then
-	WITH_SDL = 0
-	WITH_SDL_STATIC = 0
-	WITH_SDL2_STATIC = 1
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
+	 WITH_SDL = 0
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 1
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
 end
 
 if _OPTIONS["with-native-only"] then
-	WITH_SDL = 0
-	WITH_SDL_STATIC = 0
-	WITH_SDL2_STATIC = 0
-	WITH_PORTAUDIO = 0
-	WITH_OPENAL = 0
-	WITH_XAUDIO2 = 0
-	WITH_WINMM = 0
-	WITH_WASAPI = 0
-	WITH_OSS = 0
-	if (os.is("Windows")) then
-		WITH_WINMM = 1
-	elseif (os.is("macosx")) then
-		WITH_COREAUDIO = 1
-	else
-	  WITH_OSS = 1
-	end
+	 WITH_SDL = 0
+	 WITH_SDL_STATIC = 0
+	 WITH_SDL2_STATIC = 0
+	 WITH_PORTAUDIO = 0
+	 WITH_OPENAL = 0
+	 WITH_XAUDIO2 = 0
+	 WITH_WINMM = 0
+	 WITH_WASAPI = 0
+	 WITH_OSS = 0
+	 if (os.is("Windows")) then
+			WITH_WINMM = 1
+	 elseif (os.is("macosx")) then
+			WITH_COREAUDIO = 1
+	 else
+			WITH_OSS = 1
+	 end
 end
 
 if _OPTIONS["with-oss"] then
-        WITH_OSS = 1
+	 WITH_OSS = 1
 end
 
 if _OPTIONS["with-portmidi"] then
-	WITH_PORTMIDI = 1
+	 WITH_PORTMIDI = 1
 end
 
 if _OPTIONS["with-tools"] then
-	WITH_TOOLS = 1
+	 WITH_TOOLS = 1
 end
 
 print ("")
@@ -309,428 +309,432 @@ print ("")
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 solution "SoLoud"
-  location(buildroot)
-	configurations { "Debug", "Release" }
-	startproject "simplest"	
-	targetdir "../bin"
-	debugdir "../bin"
-	flags { "NoExceptions", "NoRTTI", "NoPCH" }
-	if (os.is("Windows")) then defines { "_CRT_SECURE_NO_WARNINGS" } end
-    configuration { "x32", "Debug" }
-        targetsuffix "_x86_d"   
-    configuration { "x32", "Release" }
-		flags {	"EnableSSE2" }
-        targetsuffix "_x86"
-    configuration { "x64", "Debug" }
-        targetsuffix "_x64_d"    
-    configuration { "x64", "Release" }
-        targetsuffix "_x64"
-    configuration { "Release" }
-    	flags { "Optimize", "OptimizeSpeed", "NoEditAndContinue", "No64BitChecks" }   
-		defines { "NDEBUG" }
-		objdir (buildroot .. "/release")
-    configuration { "Debug" }
-		flags {"Symbols" }
-		defines { "DEBUG" }
-		objdir (buildroot .. "/debug")
-	
-	-- Enable SSE4.1 when using gmake + gcc.
-	-- TODO: SoLoud could do with some better platform determination. genie
-	--       doesn't do this well on it's own and is recommended to setup this
-	--       manually. See https://github.com/bkaradzic/bx/blob/master/scripts/toolchain.lua
-	configuration { "gmake" }
-		buildoptions { 
-			"-msse4.1", 
-			"-fPIC"
-		}
+location(buildroot)
+configurations { "Debug", "Release" }
+startproject "simplest"	
+targetdir "../bin"
+debugdir "../bin"
+flags { "NoExceptions", "NoRTTI", "NoPCH" }
+if (os.is("Windows")) then defines { "_CRT_SECURE_NO_WARNINGS" } end
+configuration { "x32", "Debug" }
+targetsuffix "_x86_d"   
+configuration { "x32", "Release" }
+flags {	"EnableSSE2" }
+targetsuffix "_x86"
+configuration { "x64", "Debug" }
+targetsuffix "_x64_d"    
+configuration { "x64", "Release" }
+targetsuffix "_x64"
+configuration { "Release" }
+flags { "Optimize", "OptimizeSpeed", "NoEditAndContinue", "No64BitChecks" }   
+defines { "NDEBUG" }
+objdir (buildroot .. "/release")
+configuration { "Debug" }
+flags {"Symbols" }
+defines { "DEBUG" }
+objdir (buildroot .. "/debug")
 
-    configuration {}
+-- Enable SSE4.1 when using gmake + gcc.
+-- TODO: SoLoud could do with some better platform determination. genie
+--       doesn't do this well on it's own and is recommended to setup this
+--       manually. See https://github.com/bkaradzic/bx/blob/master/scripts/toolchain.lua
+configuration { "gmake" }
+buildoptions { 
+	 "-msse4.1", 
+	 "-fPIC"
+}
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
-
-  project "simplest"
-	kind "ConsoleApp"
-	language "C++"
-	files {
-	  "../demos/simplest/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
-if (WITH_ALSA == 1) then
-	links {"asound"}
-end
-if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
-end
-
-		links {"SoloudStatic", "dl"}
-		if (not os.is("windows")) then
-		  links { "pthread" }
-		end
-
-		targetname "simplest"
+configuration {}
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  project "welcome"
-	kind "ConsoleApp"
-	language "C++"
-	files {
-	  "../demos/welcome/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+project "simplest"
+kind "ConsoleApp"
+language "C++"
+files {
+	 "../demos/simplest/**.c*"
+}
+includedirs {
+	 "../include"
+}
 if (WITH_ALSA == 1) then
-	links {"asound"}
+	 links {"asound"}
 end
 if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
+	 links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic", "dl"}
-		if (not os.is("windows")) then
-		  links { "pthread" }
-		end
+links {"SoloudStatic", "dl"}
+if (not os.is("windows")) then
+	 links { "pthread" }
+end
 
-		targetname "welcome"
+targetname "simplest"
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  project "null"
-	kind "ConsoleApp"
-	language "C++"
-	files {
-	  "../demos/null/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+project "welcome"
+kind "ConsoleApp"
+language "C++"
+files {
+	 "../demos/welcome/**.c*"
+}
+includedirs {
+	 "../include"
+}
 if (WITH_ALSA == 1) then
-	links {"asound"}
+	 links {"asound"}
 end
 if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
+	 links {"AudioToolbox.framework"}
 end
 
+links {"SoloudStatic", "dl"}
+if (not os.is("windows")) then
+	 links { "pthread" }
+end
 
-		links {"SoloudStatic", "dl"}
-		if (not os.is("windows")) then
-		  links { "pthread" }
-		end
-
-		targetname "null"
+targetname "welcome"
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  project "enumerate"
-	kind "ConsoleApp"
-	language "C++"
-	files {
-	  "../demos/enumerate/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+project "null"
+kind "ConsoleApp"
+language "C++"
+files {
+	 "../demos/null/**.c*"
+}
+includedirs {
+	 "../include"
+}
 if (WITH_ALSA == 1) then
-	links {"asound"}
+	 links {"asound"}
 end
 if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
+	 links {"AudioToolbox.framework"}
 end
 
-		links {"SoloudStatic", "dl"}
-		if (not os.is("windows")) then
-		  links { "pthread" }
-		end
 
-		targetname "enumerate"
+links {"SoloudStatic", "dl"}
+if (not os.is("windows")) then
+	 links { "pthread" }
+end
+
+targetname "null"
+
+-- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+
+project "enumerate"
+kind "ConsoleApp"
+language "C++"
+files {
+	 "../demos/enumerate/**.c*"
+}
+includedirs {
+	 "../include"
+}
+if (WITH_ALSA == 1) then
+	 links {"asound"}
+end
+if (WITH_COREAUDIO == 1) then
+	 links {"AudioToolbox.framework"}
+end
+
+links {"SoloudStatic", "dl"}
+if (not os.is("windows")) then
+	 links { "pthread" }
+end
+
+targetname "enumerate"
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 if (WITH_SDL == 1) then
 
-	project "SoloudDemoCommon"
-		kind "StaticLib"
-		targetdir "../lib"
-		language "C++"
+	 project "SoloudDemoCommon"
+	 kind "StaticLib"
+	 targetdir "../lib"
+	 language "C++"
 
-	files {
-	  "../demos/common/**.c*",
-	  "../demos/common/imgui/**.c*",
-	  "../demos/common/glew/GL/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  "../demos/common",
-	  "../demos/common/imgui",
-	  "../demos/common/glew",
-	  sdl2_include
-	}
-	defines { "GLEW_STATIC" }
+	 files {
+			"../demos/common/**.c*",
+			"../demos/common/imgui/**.c*",
+			"../demos/common/glew/GL/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			"../demos/common",
+			"../demos/common/imgui",
+			"../demos/common/glew",
+			sdl2_include
+	 }
+	 defines { "GLEW_STATIC" }
 
-		targetname "solouddemocommon"
+	 targetname "solouddemocommon"
 end
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-	project "SoloudStatic"
-		kind "StaticLib"
-		targetdir "../lib"
-		language "C++"
+project "SoloudStatic"
+kind "StaticLib"
+targetdir "../lib"
+language "C++"
 
-		files
-		{
-		"../src/audiosource/**.c*",
-		"../src/filter/**.c*",
-		"../src/core/**.c*"
-	  }
+files
+{
+	 "../src/audiosource/**.c*",
+	 "../src/filter/**.c*",
+	 "../src/core/**.c*"
+}
 
-		includedirs
-		{
-		  "../src/**",
-	  "../include"
-		}
+includedirs
+{
+	 "../src/**",
+	 "../include"
+}
 if (WITH_OPENAL == 1) then
-	defines {"WITH_OPENAL"}
-	files {
-	  "../src/backend/openal/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  openal_include
-	}
+	 defines {"WITH_OPENAL"}
+	 files {
+			"../src/backend/openal/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			openal_include
+	 }
 end
 
 if (WITH_ALSA == 1) then
-	defines {"WITH_ALSA"}
-	files {
-	  "../src/backend/alsa/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines {"WITH_ALSA"}
+	 files {
+			"../src/backend/alsa/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end
 
 if (WITH_OSS == 1) then
-	defines {"WITH_OSS"}
-	files {
-	  "../src/backend/oss/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines {"WITH_OSS"}
+	 files {
+			"../src/backend/oss/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end
 
 if (WITH_COREAUDIO == 1) then
-	defines {"WITH_COREAUDIO"}
-	files {
-	  "../src/backend/coreaudio/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines {"WITH_COREAUDIO"}
+	 files {
+			"../src/backend/coreaudio/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end
 
 if (WITH_PORTAUDIO == 1) then
-	defines {"WITH_PORTAUDIO"}
+	 defines {"WITH_PORTAUDIO"}
 
-	files {
-	  "../src/backend/portaudio/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  portaudio_include
-	}
+	 files {
+			"../src/backend/portaudio/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			portaudio_include
+	 }
 end
 
 if (WITH_SDL == 1) then
-		defines { "WITH_SDL" }
-	files {
-	  "../src/backend/sdl/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  sdl2_include
-	}
+	 defines { "WITH_SDL" }
+	 files {
+			"../src/backend/sdl/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			sdl2_include
+	 }
 end
 
 if (WITH_SDL_STATIC == 1) then
-		defines { "WITH_SDL_STATIC" }
-	files {
-	  "../src/backend/sdl_static/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  sdl_include
-	}
+	 defines { "WITH_SDL_STATIC" }
+	 files {
+			"../src/backend/sdl_static/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			sdl_include
+	 }
 end
 
 if (WITH_SDL2_STATIC == 1) then
-		defines { "WITH_SDL2_STATIC" }
-	files {
-	  "../src/backend/sdl2_static/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  sdl2_include
-	}
+	 defines { "WITH_SDL2_STATIC" }
+	 files {
+			"../src/backend/sdl2_static/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			sdl2_include
+	 }
 end
 
 if (WITH_WASAPI == 1) then
-		defines { "WITH_WASAPI" }
-	files {
-	  "../src/backend/wasapi/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines { "WITH_WASAPI" }
+	 files {
+			"../src/backend/wasapi/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end
 
 if (WITH_XAUDIO2 == 1) then
-	defines {"WITH_XAUDIO2"}
-	files {
-	  "../src/backend/xaudio2/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  dxsdk_include
-	}
+	 defines {"WITH_XAUDIO2"}
+	 files {
+			"../src/backend/xaudio2/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			dxsdk_include
+	 }
 end
 
 if (WITH_WINMM == 1) then
-		defines { "WITH_WINMM" }
-	files {
-	  "../src/backend/winmm/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines { "WITH_WINMM" }
+	 files {
+			"../src/backend/winmm/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end
 if (WITH_NULL == 1) then
-    defines { "WITH_NULL" }
-	files {
-	  "../src/backend/null/**.c*"
-	  }
-	includedirs {
-	  "../include"
-	}
+	 defines { "WITH_NULL" }
+	 files {
+			"../src/backend/null/**.c*"
+	 }
+	 includedirs {
+			"../include"
+	 }
 end    
 
-		targetname "soloud_static"
+targetname "soloud_static"
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 if (WITH_TOOLS == 1) then
 
-	project "codegen"
-		kind "ConsoleApp"
-		language "C++"
-		files {
+	 project "codegen"
+	 kind "ConsoleApp"
+	 language "C++"
+	 files {
 		  "../src/tools/codegen/**.cpp"
-		}
-		targetname "codegen"
+	 }
+	 targetname "codegen"
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 if (WITH_TOOLS == 1) then
 
-	project "tedsid2dump"
-		kind "ConsoleApp"
-		language "C++"
-		files {
+	 project "tedsid2dump"
+	 kind "ConsoleApp"
+	 language "C++"
+	 files {
 		  "../src/tools/tedsid2dump/**.cpp"
-		}
-		targetname "tedsid2dump"
+	 }
+	 targetname "tedsid2dump"
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 if (WITH_TOOLS == 1) then
 
-	project "resamplerlab"
-		kind "ConsoleApp"
-		language "C++"
-		files {
+	 project "resamplerlab"
+	 kind "ConsoleApp"
+	 language "C++"
+	 files {
 		  "../src/tools/resamplerlab/**.c*"
-		}
+	 }
 
-		targetname "resamplerlab"
+	 targetname "resamplerlab"
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
 if (WITH_TOOLS == 1) then
 
-	project "lutgen"
-		kind "ConsoleApp"
-		language "C++"
-		files {
+	 project "lutgen"
+	 kind "ConsoleApp"
+	 language "C++"
+	 files {
 		  "../src/tools/lutgen/**.c*"
-		}
+	 }
 
-		targetname "lutgen"
+	 targetname "lutgen"
 end
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  project "c_test"
-	kind "ConsoleApp"
-	language "C++"
-	files {
-	  "../demos/c_test/**.c*",
-	  "../src/c_api/soloud_c.cpp"
-	  }
-	includedirs {
-	  "../include"
-	}
+project "c_test"
+kind "ConsoleApp"
+language "C++"
+files {
+	 "../demos/c_test/**.c*",
+	 "../src/c_api/soloud_c.cpp"
+}
+includedirs {
+	 "../include"
+}
 
-		links {"SoloudStatic", "dl"}
-		if (not os.is("windows")) then
-		  links { "pthread" }
-		end
+links {"SoloudStatic", "dl"}
+if (not os.is("windows")) then
+	 links { "pthread" }
+end
 if (WITH_ALSA == 1) then
-	links {"asound"}
+	 links {"asound"}
 end
 if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
+	 links {"AudioToolbox.framework"}
 end
 
 
-		targetname "c_test"
+targetname "c_test"
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-	project "SoloudDynamic"
-		kind "SharedLib"
-		targetdir "../lib"
-		language "C++"
-		files
-		{
-		  "../src/c_api/**.c*"
-		}
+project "SoloudDynamic"
+kind "SharedLib"
+targetdir "../lib"
+language "C++"
+files
+{
+	 "../src/c_api/**.c*"
+}
 
-		includedirs
-		{
-		  "../src/**",
-		  "../include"
-		}
+includedirs
+{
+	 "../src/**",
+	 "../include"
+}
 
-		links {"SoloudStatic", "dl"}
+links {"SoloudStatic"}
+
+if (os.is("Linux")) then
+	 links {"dl"}
+end
+--if (os.is("Windows")) then
+--	 linkoptions { "/DEF:\"../../src/c_api/soloud.def\"" }
+--end
 
 if (WITH_ALSA == 1) then
-	links {"asound"}
+	 links {"asound"}
 end
 if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
-end
-if (os.is("Windows")) then
-	linkoptions { "/DEF:\"../../src/c_api/soloud.def\"" }
+	 links {"AudioToolbox.framework"}
 end
 
-		targetname "soloud"
-		implibdir("../lib")
-		implibname("soloud")
+targetname "soloud"
+implibdir("../lib")
+implibname("soloud")
 
 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
@@ -740,131 +744,131 @@ end
 
 if (WITH_SDL == 1) then
 
-function sdl2_lib()
-    configuration { "x32" } 
-        libdirs { sdl2_lib_x86 }
-    configuration { "x64" } 
-        libdirs { sdl2_lib_x64 }
-    configuration {}
-end
+	 function sdl2_lib()
+			configuration { "x32" } 
+			libdirs { sdl2_lib_x86 }
+			configuration { "x64" } 
+			libdirs { sdl2_lib_x64 }
+			configuration {}
+	 end
 
-function CommonDemo(_name)
-  project(_name)
-	kind "WindowedApp"
-	language "C++"
-	files {
-	  "../demos/" .. _name .. "/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  "../demos/common",
-	  "../demos/common/imgui",
-	  "../demos/common/glew",
-	  sdl2_include
-	}
-	sdl2_lib()
+	 function CommonDemo(_name)
+			project(_name)
+			kind "WindowedApp"
+			language "C++"
+			files {
+				 "../demos/" .. _name .. "/**.c*"
+			}
+			includedirs {
+				 "../include",
+				 "../demos/common",
+				 "../demos/common/imgui",
+				 "../demos/common/glew",
+				 sdl2_include
+			}
+			sdl2_lib()
 
-	defines { "GLEW_STATIC" }
+			defines { "GLEW_STATIC" }
 
-if (WITH_ALSA == 1) then
-	links {"asound"}
-end
-if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
-end
+			if (WITH_ALSA == 1) then
+				 links {"asound"}
+			end
+			if (WITH_COREAUDIO == 1) then
+				 links {"AudioToolbox.framework"}
+			end
 
-		links {"SoloudStatic", "SoloudDemoCommon", "SDL2main", "SDL2", "opengl32", "dl"}
+			links {"SoloudStatic", "SoloudDemoCommon", "SDL2main", "SDL2", "opengl32", "dl"}
 
-		targetname (_name)
-end
+			targetname (_name)
+	 end
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  CommonDemo("3dtest")
+	 CommonDemo("3dtest")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  CommonDemo("virtualvoices")
+	 CommonDemo("virtualvoices")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  CommonDemo("mixbusses")
+	 CommonDemo("mixbusses")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  CommonDemo("pewpew")
+	 CommonDemo("pewpew")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
-		
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 
    CommonDemo("space")  
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
    CommonDemo("multimusic")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
    CommonDemo("monotone")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
    CommonDemo("tedsid")
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-  project "piano"
-	kind "WindowedApp"
-	language "C++"
-	files {
-	  "../demos/piano/**.c*",
-	  "../demos/common/**.c*",
-	  "../demos/common/imgui/**.c*",
-	  "../demos/common/glew/GL/**.c*"
-	  }
-	includedirs {
-	  "../include",
-	  "../demos/common",
-	  "../demos/common/imgui",
-	  "../demos/common/glew",
-	  sdl2_include
-	}
-    sdl2_lib()
-    
-	defines { "GLEW_STATIC" }
+	 project "piano"
+	 kind "WindowedApp"
+	 language "C++"
+	 files {
+			"../demos/piano/**.c*",
+			"../demos/common/**.c*",
+			"../demos/common/imgui/**.c*",
+			"../demos/common/glew/GL/**.c*"
+	 }
+	 includedirs {
+			"../include",
+			"../demos/common",
+			"../demos/common/imgui",
+			"../demos/common/glew",
+			sdl2_include
+	 }
+	 sdl2_lib()
+	 
+	 defines { "GLEW_STATIC" }
 
-if (WITH_ALSA == 1) then
-	links {"asound"}
-end
-if (WITH_COREAUDIO == 1) then
-	links {"AudioToolbox.framework"}
-end
+	 if (WITH_ALSA == 1) then
+			links {"asound"}
+	 end
+	 if (WITH_COREAUDIO == 1) then
+			links {"AudioToolbox.framework"}
+	 end
 
-	if (WITH_PORTMIDI == 1) then
-		includedirs {
-		portmidi_include
-		}
-		defines {"USE_PORTMIDI"}
-		links { "portmidi" }
-	end
+	 if (WITH_PORTMIDI == 1) then
+			includedirs {
+				 portmidi_include
+			}
+			defines {"USE_PORTMIDI"}
+			links { "portmidi" }
+	 end
 
-		links {"SoloudStatic", "SDL2main", "SDL2", "opengl32", "dl"}
+	 links {"SoloudStatic", "SDL2main", "SDL2", "opengl32", "dl"}
 
-		targetname "piano"
+	 targetname "piano"
 
-		configuration "Debug"
-		if (WITH_PORTMIDI == 1) then
+	 configuration "Debug"
+	 if (WITH_PORTMIDI == 1) then
 			libdirs { portmidi_debug }
-		end
+	 end
 
-		configuration "Release"
-		if (WITH_PORTMIDI == 1) then
+	 configuration "Release"
+	 if (WITH_PORTMIDI == 1) then
 			libdirs { portmidi_release }
-		end
-        configuration {}
+	 end
+	 configuration {}
 
--- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
+	 -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< -- 8< --
 
-    CommonDemo("env")
+	 CommonDemo("env")
 
 end
 
